@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+
+
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+
+    <html>
+
+    <head>
+        <meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+        <meta HTTP-EQUIV="Expires" content="Mon, 01 Jan 1990 12:00:00 GMT" />
+
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title> Car Pool</title>
+        <style>
+
+        </style>
+    </head><span id="j_id0:j_id4">
+
+ <nav class="navbar">
+
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse"
+                    type="button" value="aaa">
+                    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar top-bar"></span>
+    <span class="icon-bar middle-bar"></span>
+    <span class="icon-bar bottom-bar"></span>
+    </button>
+
+
+    <h4 class="navbar-text btop navHead  logText">Car Pool</h4>
+
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left" id="leftItems">
+
+
+
+            <li class="btoph">
+                <a class="navHead" data-target="#myModal" data-toggle="modal" href="#">  About </a>
+            </li>
+            <li class="btoph">
+                <a id="offerRides" class="navHead" href="/mydetails.html"> Offer Ride </a>
+            </li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+            <li class="btoph">
+                <a class="navHead" href="#" onclick="signOut();"> Signout  </a>
+            </li>
+        </ul>
+
+
+    </div>
+
+
+
+    </div>
+    </nav>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title">The Team</h4>
+                </div>
+
+                <div class="modal-body col-sm-12 nop">
+
+                    <div class="container col-sm-12">
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
+                                />
+                                <div class="persDetails">ABC</div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                            <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
+                                />
+                                <div class="persDetails">Pavan</div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                            <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
+                                />
+                                <div class="persDetails"> ABC </div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <body>
+        <div class="saveIcon col-md-3">
+
+            <div class="form-control btn btn-shell-df " style="padding: 12px 10px;" onclick="suggest(document.getElementById('proximityList').value);">
+                SEARCH &nbsp;<span class="glyphicon glyphicon-search"></span></div>
+
+        </div>
+        <div class="suggestionsCard  col-md-4 exisitingRequest">
+            <div class="mailIdInfo"><span class="rMailIdInfo"> i have requested <span id="Rmail">  </span></div>
+            <div class="pd3">
+                <span id="Rcar">  </span>
+                <span style="float: right;" id="Rnum"> </span>
+            </div>
+            <div class="pd3"> Going to: <span id="Rhome">  JP Nagar </span> </div>
+            <div class="pd3"> Leaves Home at: <span id="Rleavehome"> </span> </div>
+            <div class="pd3"> Leaves Office at: <span id="Rleaveoff"></span> </div>
+            <!--<div> <button class="requestBtn">cancel</button> </div>-->
+        </div>
+        <div class="sidenav" id="mySidenav">
+
+            <div class="col-md-12 filterDiv" id="proximityBar">
+                <div class="proximityBar " style="padding: 10px 30px;text-align: center;border-bottom: 1px solid #e4e4e4; ">
+                    Showing the suggestion within
+                    <select id="proximityList" onchange="suggest(this.value);">
+                      <option value="1">1</option>
+                      <option selected="selected" value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="4">5</option>
+                      <option value="4">6</option>
+                  </select> kms
+                </div>
+
+            </div>
+
+            <a class="closebtn" href="javascript:void(0)" onclick="closeNav()">&times;</a>
+            <div style="margin-bottom:70px;"> </div>
+        </div>
+
+
+        <div class="moveBg">
+            <div class="panel panel-default height100 ">
+                <div id="googleMap" style="width:100%;height:100%"></div>
+            </div>
+        </div>
+        <form id="j_id0:j_id26" name="j_id0:j_id26" method="post" action="/requestride" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="j_id0:j_id26" value="j_id0:j_id26" />
+
+            <script type="text/javascript" language="Javascript">
+                                                                   function dpf(f) {
+                                                                       var adp = f.adp;
+                                                                       if (adp != null) {
+                                                                           for (var i = 0; i < adp.length; i++) {
+                                                                               adp[i].parentNode.removeChild(adp[i]);
+                                                                           }
+                                                                       }
+                                                                   };
+
+                                                                   function apf(f, pvp) {
+                                                                       var adp = new Array();
+                                                                       f.adp = adp;
+                                                                       var ps = pvp.split(',');
+                                                                       for (var i = 0, ii = 0; i < ps.length; i++ , ii++) {
+                                                                           var p = document.createElement("input");
+                                                                           p.type = "hidden";
+                                                                           p.name = ps[i];
+                                                                           p.value = ps[i + 1];
+                                                                           f.appendChild(p);
+                                                                           adp[ii] = p;
+                                                                           i += 1;
+                                                                       }
+                                                                   };
+
+                                                                   function jsfcljs(f, pvp, t) {
+                                                                       apf(f, pvp);
+                                                                       var ft = f.target;
+                                                                       if (t) {
+                                                                           f.target = t;
+                                                                       }
+                                                                       f.submit();
+                                                                       f.target = ft;
+                                                                       dpf(f);
+                                                                   };
+            </script>
+            <script>
+                                                                   function openSearch() {
+                                                                       SfdcApp.Visualforce.VSManager.vfPrepareForms(["j_id0:j_id26"]);
+                                                                       if (typeof jsfcljs == 'function') {
+                                                                           jsfcljs(document.forms['j_id0:j_id26'], 'j_id0:j_id26:j_id27,j_id0:j_id26:j_id27', '');
+                                                                       }
+                                                                       return false
+                                                                   }
+            </script>
+            <script>
+                function openMyDetails() {
+                    SfdcApp.Visualforce.VSManager.vfPrepareForms(["j_id0:j_id26"]);
+                    if (typeof jsfcljs == 'function') {
+                        jsfcljs(document.forms['j_id0:j_id26'], 'j_id0:j_id26:j_id28,j_id0:j_id26:j_id28', '');
+                    }
+                    return false
+                }
+            </script>
+
+
+
+        </form>
+
+
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/geofire/4.1.2/geofire.min.js"></script>
+    <script>
+                // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyBdT4TvGUX8m4hIN2hin0j4-JGm9oE7ZFw",
+                    authDomain: "sbo-car-pool.firebaseapp.com",
+                    databaseURL: "https://sbo-car-pool.firebaseio.com",
+                    projectId: "sbo-car-pool",
+                    storageBucket: "sbo-car-pool.appspot.com",
+                    messagingSenderId: "588518243561"
+                };
+                firebase.initializeApp(config);
+    </script>
+    <script src="requestride.js"></script>
+
+    </html>
+</body>
+
+</html>

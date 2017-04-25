@@ -1,0 +1,72 @@
+{
+    "rules": {
+        "userTokens": {
+            "$uid": {
+                /* this should be only cloud functions */
+                ".write": "auth != null",
+                "token": {
+                    ".read": "auth != null"
+                },
+                "$other": {
+                    ".validate": "auth != null"
+                }
+            }
+        },
+        "users": {
+            "$uid": {
+                ".read": "auth != null",
+                ".write": "$uid == auth.uid",
+                "shellMailId": {
+                    ".validate": "$uid == auth.uid && newData.val().endsWith('@shell.com')"
+                },
+                "isVerified": {
+                    ".write": true,
+                    ".validate": "newData.isBoolean() && auth.uid != $uid"
+                },
+                "capacity": {
+                    //make capacity a number
+                    //".validate": "newData.isNumber() && newData.val() < 9"
+                },
+                "car": {
+                    ".validate": "newData.isString() && newData.val().length < 30"
+                },
+                "remainingSeats": {
+                    //".validate": "newData.val() > -1",
+                    ".write": "$uid != auth.uid"
+                },
+                "vehicleNumber": {
+                    ".validate": "newData.val().length < 15"
+                }
+            }
+        },
+        "activeRoutes": {
+            "$uid": {
+                ".read": "$uid == auth.uid",
+                ".write": "$uid == auth.uid"
+            }
+        },
+        "userroutes": {
+            ".read": "auth != null",
+            ".write": "auth != null",
+            "$uid": {
+                ".validate": "$uid.beginsWith(auth.uid)",
+                ".indexOn": "g"
+            }
+        },
+        "routes": {
+            "$uid": {
+                ".read": "$uid == auth.uid",
+                ".write": "$uid == auth.uid",
+                ".indexOn": "isDeleted"
+            }
+        },
+        "requests": {
+            ".read": "auth != null",
+            "$uid": {
+                ".read": "auth != null",
+                ".write": "$uid == auth.uid",
+                ".indexOn": "requestedTo"
+            }
+        }
+    }
+}

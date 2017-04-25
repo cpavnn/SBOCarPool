@@ -1,0 +1,741 @@
+<!DOCTYPE HTML>
+
+
+<head>
+
+    </script>
+
+    <meta HTTP-EQUIV="Expires" content="Mon, 01 Jan 1990 12:00:00 GMT" />
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .panel-default>.panel-heading {
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #FBCE07;
+            border-color: #FBCE07;
+            ;
+            font-variant: small-caps;
+            border-radius: 0px;
+            text-align: left;
+        }
+
+        .panel {
+            border-radius: 0px;
+            text-align: left;
+        }
+
+        .btn {
+            padding-left: 0px;
+        }
+
+        .btn-shell-df {
+            background-color: #DD1D21;
+            color: white;
+            border-color: #DD1D21;
+            font-weight: bold;
+            border-radius: 0px;
+            height: 50px;
+        }
+
+        .btn-shell-df:hover {
+            background-color: white;
+            color: #DD1D21;
+            border-color: #DD1D21;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        .navbar {
+            background-color: white;
+            border-bottom: 1px solid #DD1D21;
+            color: black;
+            border-radius: 0px;
+            margin-bottom: 0px;
+        }
+
+        .navHead {
+            font-size: 18px;
+            color: #7d7b75;
+            font-variant: small-caps;
+        }
+
+        .outerdiv {
+            border: 1px solid #DD1D21;
+            background-color: white;
+        }
+
+        .bggrey {
+            background-color: grey;
+        }
+
+        .form-control {
+            border-radius: 0px;
+        }
+
+        .bbottom2 {
+            border-bottom: 2px solid black;
+            padding-bottom: 5px;
+        }
+
+        .outerdiv {
+            padding-top: 15px;
+            margin-top: 10%;
+        }
+
+        .logindivdetail {
+            padding-top: 20px;
+        }
+
+        .registerdivdetail {
+            padding-top: 20px;
+        }
+
+        .nopd {
+            padding-left: 0px;
+        }
+
+        .pdtop15 {
+            padding-top: 15px;
+        }
+
+        .choice {
+            min-height: 30px;
+        }
+
+        .half {
+            width: 48%;
+            float: left;
+            cursor: pointer;
+        }
+
+        .selected {
+            font-weight: bold;
+        }
+
+        .notselected {
+            font-weight: 100;
+        }
+
+        .curp {
+            cursor: pointer;
+        }
+
+        .logo {
+             background:#fff url('/carpool/resources/cloudLogo.png') no-repeat center center;
+            border: 1rem solid #fff;
+            background-size: contain;
+        }
+
+        .btop {
+            border-top: 2px solid white;
+        }
+
+        .btoph:hover {
+            border-top: 2px solid #DD1D21;
+            color: #DD1D21;
+        }
+
+        .btoph {
+            border-top: 2px solid white;
+        }
+
+        .nav>li>a:hover,
+        .nav>li>a:focus {
+            text-decoration: none;
+            background-color: #fff;
+            color: #DD1D21;
+        }
+
+        .imga {
+            margin: 15px;
+            width: 100px;
+            border: 5px solid #E1E1E1;
+            transition: width 0.5s, margin 0.5s;
+        }
+
+        .imga:hover {
+            margin: 3px;
+            width: 130px;
+            border: 10px double #DD1D21;
+        }
+
+        .persDetails {
+            position: relative;
+            top: -5px;
+            left: 10px;
+            background-color: white;
+            border: 1px solid grey;
+            font-variant: small-caps;
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .container {
+            background-color: white;
+            padding-bottom: 30px;
+        }
+
+        .modal-dialog {
+            width: 98%;
+        }
+
+        .nop {
+            padding: 0px;
+        }
+
+        .modal-content {
+            border-radius: 0px;
+        }
+
+        .modal-header {
+            font-variant: small-caps;
+            background-color: #FBCE07;
+            border-bottom: 0px;
+        }
+
+        .unmask:hover {
+            cursor: pointer;
+        }
+
+        .input-group-addon {
+            border-radius: 0px;
+        }
+
+        .pdtop30 {
+            padding-top: 30px;
+        }
+
+        .navbar>.container .navbar-brand,
+        .navbar>.container-fluid .navbar-brand {
+            margin-left: 0px;
+        }
+
+        .logText {}
+
+        .logText:hover {
+            cursor: pointer;
+            color: #DD1D21;
+        }
+
+        .navbar-toggle .icon-bar+.icon-bar {
+            background-color: #DD1D21;
+        }
+
+        .navbar-toggle .icon-bar {
+            background-color: #DD1D21;
+        }
+
+        .navbar-toggle {
+            background-color: #FBCE07;
+            border-radius: 0px;
+        }
+
+        .navbar-toggle .icon-bar {
+            width: 22px;
+            transition: all 0.2s;
+        }
+
+        .navbar-toggle .top-bar {
+            transform: rotate(45deg);
+            transform-origin: 10% 10%;
+        }
+
+        .navbar-toggle .middle-bar {
+            opacity: 0;
+        }
+
+        .navbar-toggle .bottom-bar {
+            transform: rotate(-45deg);
+            transform-origin: 10% 90%;
+        }
+
+        .navbar-toggle.collapsed .top-bar {
+            transform: rotate(0);
+        }
+
+        .navbar-toggle.collapsed .middle-bar {
+            opacity: 1;
+        }
+
+        .navbar-toggle.collapsed .bottom-bar {
+            transform: rotate(0);
+        }
+
+        .modal-body-hsse {
+            background-color: white;
+        }
+
+        .modal-header {
+            min-height: 0px;
+            padding: 10px;
+            border-bottom: 1px solid
+        }
+
+        .modal-body-upcoming {
+            background-color: white;
+        }
+
+        .modal-header {
+            min-height: 0px;
+            padding: 10px;
+            border-bottom: 1px solid
+        }
+
+        .feature-head {
+            color: #DD1D21;
+            font-weight: bold;
+        }
+
+        .list-group-item:last-child {
+            margin-bottom: 0;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
+
+        .list-group-item:first-child {
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+        }
+
+        .imga {
+            margin: 15px;
+            width: 100px;
+            border: 5px solid #E1E1E1;
+            transition: width 0.5s, margin 0.5s;
+        }
+
+        .imga:hover {
+            margin: 3px;
+            width: 130px;
+            border: 10px double #DD1D21;
+        }
+
+        .persDetails {
+            position: relative;
+            top: -5px;
+            left: 10px;
+            background-color: white;
+            border: 1px solid grey;
+            font-variant: small-caps;
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .container {
+            background-color: white;
+            padding-bottom: 30px;
+        }
+
+        .modal-dialog {
+            width: 98%;
+        }
+
+        .nop {
+            padding: 0px;
+        }
+
+        .modal-content {
+            border-radius: 0px;
+        }
+
+        .modal-header {
+            font-variant: small-caps;
+            font-variant: small-caps;
+            background-color: #FBCE07;
+            border-bottom: 0px;
+        }
+    </style>
+    <title>Shell Car Pool</title>
+
+</head>
+
+<body><span id="j_id0:j_id4">
+
+ <nav class="navbar">
+
+   <div class="container-fluid">
+
+       <div class="navbar-header">
+       <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" value="aaa">
+            <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar top-bar"></span>
+    <span class="icon-bar middle-bar"></span>
+    <span class="icon-bar bottom-bar"></span>
+    </button>
+
+    <a class="navHead logo navbar-brand" href="#">
+
+    </a>
+    <h4 class="navbar-text btop navHead  logText">Car Pool</h4>
+
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left" id="leftItems">
+
+            <li class="btoph" id="addH"></li>
+
+            <li class="btoph">
+                <a class="navHead" data-target="#myModal" data-toggle="modal" href="#">
+                      About
+                   </a>
+            </li>
+
+            <li class="btoph">
+                <a class="navHead" data-target="#myModalUpcoming" data-toggle="modal" href="#">
+                      Upcoming Features
+                </a>
+            </li>
+        </ul>
+
+
+    </div>
+
+
+
+    </div>
+    </nav>
+    <style>
+
+    </style>
+    <div class="modal fade" id="myModalUpcoming" role="dialog">
+        <div class="modal-dialog">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4> Upcoming features</h4>
+                </div>
+
+                <div class="modal-body col-sm-12 modal-body-upcoming">
+                    <div class="list-group">
+                        <div class="list-group-item ">
+                            <h3 class="list-group-item-heading feature-head">Intercity Travel</h3>
+                            <p class="list-group-item-text">Most of us travel to our hometown during the weekend</p>
+                        </div>
+                    </div>
+                    <div class="list-group">
+                        <div class="list-group-item ">
+                            <h3 class="list-group-item-heading feature-head">Traffic condition based suggestions</h3>
+                            <p class="list-group-item-text">Pairing up the most optimal driver and passengers</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </span>
+    <script type="text/javascript">
+        if (false == true) {
+            var searchRides = '<li class=\"btoph\" > <a id=\"searchRides\" class=\"navHead\" href=\"#\" onclick=\"\">Search Rides </a>  </li>';
+            $(searchRides).insertAfter($("#addH"));
+        }
+
+        if (false == true) {
+            var ht = '<li class=\"btoph\" > <a class=\"navHead\" href=\"#\" onclick=\"aa();\"> My Details </a>  </li>';
+            $(ht).insertAfter($("#addH"));
+        }
+
+        if (false == true) {
+            var logout = ' <ul class=\"nav navbar-nav navbar-right\"> <li class=\"btoph\"> <a class=\"navHead\" href=\"#\" onclick=\"logout_js();\" > Logout </a> </li> </ul>';
+            $(logout).insertAfter($("#leftItems"));
+        }
+
+
+        if (false == true) {
+            var logout =
+                ' <ul class=\"nav navbar-nav navbar-right\"> <li class=\"btoph\"> <a class=\"navHead\" href=\"#\" onclick=\"\"  > Take Tour</a> </li>  <li class=\"btoph\"> <a class=\"navHead\" href=\"#\" onclick=\"logout_js();\" > Logout </a> </li> </ul>';
+            $(logout).insertAfter($("#leftItems"));
+        }
+    </script>
+    </span><span id="j_id0:j_id22">
+
+
+   <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button">&times;</button>
+                <h4 class="modal-title">The Team</h4>
+              </div>
+
+              <div class="modal-body col-sm-12 nop">
+
+                         <div class="container col-sm-12">
+                            <div class="col-sm-12">
+
+                            <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
+                                <div class="persDetails">ABC</div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                            <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
+                                <div class="persDetails">Pavan</div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                           <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
+                                <div class="persDetails"> ABC </div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </div></span>
+
+    <div style="position: fixed; z-index: -99; width: 100%; height: 100%">
+        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="100%" id="player" src="https://youtube.com/embed/fa2zWQG-HoQ1?autoplay=1&amp;controls=0&amp;showinfo=0&amp;autohide=1&amp;loop=1&amp;playsinline=0&amp;loop=1&amp;playlist=fa2zWQG-HoQ" width="100%">
+  </iframe>
+    </div>
+
+
+    <div style="position: fixed; z-index: -98;width:100%;height:100%;background-color:rgb(56, 56, 56);opacity:0.7"></div>
+
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6 outerdiv">
+        <div class="choice col-md-12">
+            <div class="half bbottom2" id="lgDiv" onclick="showLogin();">
+                <label class="curp selected " id="lg"> L O G I N </label>
+            </div>
+            <div class="half" id="rgDiv" onclick="showReg();">
+                <label class="curp notselected " id="rg"> R E G I S T E R </label>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12 logindivdetail" id="lgn">
+                <form id="j_id0:lgnFrm" name="j_id0:lgnFrm" method="post" action="/login" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="j_id0:lgnFrm" value="j_id0:lgnFrm" />
+
+
+                    <div class="form-group input-group col-md-12">
+                        <label for="email">USERNAME</label>
+                        <div class="input-group"><input type="text" name="j_id0:lgnFrm:j_id27" value="" class="form-control" placeholder="Username should be your shell mail id excluding @example.com" />
+                            <span class="input-group-addon" id="basic-addon3">@example.com</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">PASSWORD</label>
+                        <input type="password" name="j_id0:lgnFrm:j_id29" value="" class="form-control" placeholder="Enter your password" />
+
+
+                    </div>
+                    <div class="form-group col-md-4 nopd pdtop15 "><input type="submit" name="j_id0:lgnFrm:j_id31" value="LOGIN" class="form-control btn btn-shell-df" />
+
+                    </div>
+
+                    <div class="form-group col-md-12 nopd " style="color:red;">
+                    </div>
+                    <div id="j_id0:lgnFrm:j_id36"></div>
+                </form><span id="ajax-view-state-page-container" style="display: none"><span id="ajax-view-state" style="display: none"><input type="hidden"  id="com.salesforce.visualforce.ViewState" name="com.salesforce.visualforce.ViewState" value="i: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" /><input type="hidden"  id="com.salesforce.visualforce.ViewStateVersion" name="com.salesforce.visualforce.ViewStateVersion" value="201612210034410352" /><input type="hidden"  id="com.salesforce.visualforce.ViewStateMAC" name="com.salesforce.visualforce.ViewStateMAC" value="ACNsPwkjOxZyHh0vE0tuVjAAAAFZStkazqUpuMm0pNPtgNwK5RZZQMz6DlRleZ9Dia6RnOwp116Z" /></span></span>
+
+            </div>
+            <div class="col-md-12 registerdivdetail" id="reg" style="display:none;">
+                <form>
+                    <div class="form-group input-group col-md-12">
+                        <label for="email">USERNAME</label>
+                        <div class="input-group">
+                            <input Class="form-control" id="regusr" placeholder="Username should be your shell mail id excluding @example.com" type="text" />
+
+                            <span class="input-group-addon" id="basic-addon3">@example.com</span>
+                        </div>
+
+
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">PASSWORD</label>
+
+                        <div class="input-group">
+
+                            <input Class="form-control pwdCls" id="regpwd" placeholder="Enter your password" type="password" />
+
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-eye-close unmask" title="Show/Hide password"></span>
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group col-md-4 nopd pdtop15 ">
+
+                        <input Class="form-control btn btn-shell-df" onclick="registerUser();" type="button" value="REGISTER" />
+                    </div>
+
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</body>
+
+<script type="text/javascript">
+    function validate(ele) {
+        if (ele.value) {
+            ele.style.outline = 'none';
+        } else
+            ele.style.outline = "1px solid red";
+    }
+
+    function registerUser() {
+        var regname = document.getElementById('regusr');
+        var regpwd = document.getElementById('regpwd');
+
+
+        validate(regname);
+        validate(regpwd);
+
+
+        if (regname.value.length > 0 && regpwd.value.length > 0) {
+
+            CarPoolCntrl.registerAndCreateUser(regname.value, regpwd.value, function(result, event) {
+                if (event.status) {
+                    alert(result);
+
+                } else {
+                    alert('Registration unsuccessful');
+                }
+            });
+
+        }
+    }
+
+    function showLogin() {
+
+
+        document.getElementById('lg').className = 'curp  selected';
+        document.getElementById('rg').className = 'curp notselected';
+
+        var lgn = document.getElementById('lgn');
+        lgn.style.transition = "all 4s";
+        lgn.style.display = 'block';
+
+        var rgn = document.getElementById('reg');
+        rgn.style.transition = "all 4s";
+        rgn.style.display = 'none';
+
+        document.getElementById('lgDiv').className = 'half bbottom2';
+        document.getElementById('rgDiv').className = 'half';
+
+
+
+    }
+
+    function showReg() {
+
+        document.getElementById('lg').className = 'curp notselected';
+        document.getElementById('rg').className = 'curp selected';
+
+        var lgn = document.getElementById('lgn');
+        lgn.style.transition = "display 4s";
+        lgn.style.display = 'none';
+
+        var rgn = document.getElementById('reg');
+        rgn.style.transition = "display 4s";
+        rgn.style.display = 'block';
+
+        document.getElementById('lgDiv').className = 'half';
+        document.getElementById('rgDiv').className = 'half bbottom2';
+
+    }
+
+    $('.unmask').on('click', function() {
+        console.log('prev', $('.pwdCls').attr('type'));
+        if ($('.pwdCls').attr('type') == 'password') {
+
+            changeType($('.pwdCls'), 'text');
+            $(this).addClass('glyphicon-eye-open').removeClass('glyphicon-eye-close');
+        } else {
+            changeType($('.pwdCls'), 'password');
+            $(this).addClass('glyphicon-eye-close').removeClass('glyphicon-eye-open');
+        }
+        return false;
+    });
+
+
+
+    function changeType(x, type) {
+        if (x.prop('type') == type)
+            return x; //That was easy.
+        try {
+            return x.prop('type', type); //Stupid IE security will not allow this
+        } catch (e) {
+            //Try re-creating the element (yep... this sucks)
+            //jQuery has no html() method for the element, so we have to put into a div first
+            var html = $("<div>").append(x.clone()).html();
+            var regex = /type=(\")?([^\"\s]+)(\")?/; //matches type=text or type="text"
+            //If no match, we add the type attribute to the end; otherwise, we replace
+            var tmp = $(html.match(regex) == null ?
+                html.replace(">", ' type="' + type + '">') :
+                html.replace(regex, 'type="' + type + '"'));
+            //Copy data from old element
+            tmp.data('type', x.data('type'));
+            var events = x.data('events');
+            var cb = function(events) {
+                return function() {
+                    //Bind all prior events
+                    for (i in events) {
+                        var y = events[i];
+                        for (j in y)
+                            tmp.bind(i, y[j].handler);
+                    }
+                }
+            }(events);
+            x.replaceWith(tmp);
+            setTimeout(cb, 10); //Wait a bit to call function
+            return tmp;
+        }
+    }
+</script>
+
+
+<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDBlSyOAUVmbPH2JSiOovWvtvo7CbgXzz4",
+        authDomain: "car-pool-8d29c.firebaseapp.com",
+        databaseURL: "https://car-pool-8d29c.firebaseio.com",
+        storageBucket: "car-pool-8d29c.appspot.com",
+        messagingSenderId: "1055593467369"
+    };
+    firebase.initializeApp(config);
+</script>

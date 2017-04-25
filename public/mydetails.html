@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Car Pool</title>
+
+    <script src="https://maps.google.com/maps/api/js?libraries=geometry&amp;libraries=places&amp;sensor=false" type="text/javascript"></script>
+
+    <link href="app.css" rel="stylesheet" />
+    <link href="hopscotch.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse"
+                    type="button" value="aaa">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                    </button>
+
+
+                    <h4 class="navbar-text btop navHead  logText">Car Pool</h4>
+
+
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left" id="leftItems">
+
+                    <li class="btoph" id="addH"></li>
+
+                    <li class="btoph">
+                        <a class="navHead" data-target="#myModal" data-toggle="modal" href="#">  About </a>
+                    </li>
+                    <li class="btoph">
+                        <a id="searchRides" class="navHead" href="/requestride.html"> Search Rides </a>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="btoph hopscotchNav">
+                        <a class="navHead" href="#" onclick="startTour();"> 	Take Tour 	</a>
+                    </li>
+                    <li class="btoph">
+                        <a class="navHead" href="#" onclick="signOut();"> Signout  </a>
+                    </li>
+                </ul>
+
+
+            </div>
+
+
+
+        </div>
+    </nav>
+
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title">The Team</h4>
+                </div>
+
+                <div class="modal-body col-sm-12 nop">
+
+                    <div class="container col-sm-12">
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
+                                />
+                                <div class="persDetails">Aashish</div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                            <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
+                                />
+                                <div class="persDetails">Pavan</div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                            <div class="col-sm-3 center ">
+                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
+                                />
+                                <div class="persDetails"> Rohan </div>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <body>
+        <span class="activateIcon" id="activate" onclick="delgateActivateRemoveTheRoutes(this);">
+     <span class="glyphicon glyphicon-ok"></span>
+        </span>
+        <span class="removeIcon" id="remove" onclick="delgateActivateRemoveTheRoutes(this);">
+     <span class="glyphicon glyphicon-remove"></span>
+        </span>
+
+
+        <div class="upnav" id="myUpnav">
+            <a class="closebtn" href="javascript:void(0)" onclick="closeNav()">&times;</a>
+            <div class="col-md-4 relative">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+
+                        Details
+
+                    </div>
+
+                    <div class="panel-body">
+                        <form id="j_id0:detailFrm" name="j_id0:detailFrm" method="post" action="/mydetails" enctype="application/x-www-form-urlencoded">
+                            <input type="hidden" name="j_id0:detailFrm" value="j_id0:detailFrm" />
+
+                            <div class="form-group col-md-12">
+                                <label for="email">Vehicle</label><input id="j_id0:detailFrm:vehicle" type="text" name="j_id0:detailFrm:vehicle"
+                                    class="form-control" placeholder="Color and the Vehicle, Eg: Red Alto" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="capacity">Capacity:</label><input id="j_id0:detailFrm:capacity" type="text" name="j_id0:detailFrm:capacity"
+                                    class="form-control" placeholder="Excluding the driver" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="num">Vehicle Number</label><input id="j_id0:detailFrm:vehicleNum" type="text"
+                                    name="j_id0:detailFrm:vehicleNum" class="form-control" placeholder="Just the last 4 digits"
+                                />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="addr">Home Landmark/Locality</label><input id="j_id0:detailFrm:homeLoc" type="text"
+                                    name="j_id0:detailFrm:usrHome" class="form-control" placeholder="Eg: Hotel Nandhini, JP Nagar"
+                                />
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label for="num">I Leave home around</label><input id="j_id0:detailFrm:leaveTo" type="text"
+                                    name="j_id0:detailFrm:leaveTo" value="" class="form-control" placeholder="Time in 24Hrs Format, Eg: 7.30"
+                                />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="num">I Leave office around</label><input id="j_id0:detailFrm:leaveFrom" type="text"
+                                    name="j_id0:detailFrm:leaveFrom" value="" class="form-control" placeholder="Time in 24Hrs Format, Eg: 15.15"
+                                />
+                            </div>
+
+                            <input class="form-control btn btn-shell-df col-md-12 " onclick="checkFields(this);" type="button" value="Save" />
+                            <div id="j_id0:detailFrm:j_id56"></div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="moveBg">
+            <div class="panel panel-default height100 ">
+                <div id="map_canvas" style="width:100%;height:100%;"></div>
+            </div>
+        </div>
+        <div class="routesDiv " id="routesDiv">
+            <div class="col-md-2">
+                <div class="card valgn" onclick="openNav()">
+                    <span class="detailsText" id="myDetailsButton">My Details&nbsp; </span>
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-2" id="newRouteId" onclick="addNewRoute()">
+                <div class="card routeButton valgn">
+                    <span class="detailsText" id="newRouteButton"> New Route &nbsp; </span>
+                    <span class="glyphicon glyphicon-plus"></span>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <input class="controls" id="pac-input" placeholder="Destination" type="text" />
+
+
+
+
+
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/geofire/4.1.2/geofire.min.js"></script>
+
+    <script>
+                                                           // Initialize Firebase
+                                                           var config = {
+                                                               apiKey: "AIzaSyBdT4TvGUX8m4hIN2hin0j4-JGm9oE7ZFw",
+                                                               authDomain: "sbo-car-pool.firebaseapp.com",
+                                                               databaseURL: "https://sbo-car-pool.firebaseio.com",
+                                                               projectId: "sbo-car-pool",
+                                                               storageBucket: "sbo-car-pool.appspot.com",
+                                                               messagingSenderId: "588518243561"
+                                                           };
+                                                           firebase.initializeApp(config);
+    </script>
+    <script src="hopscotch.min.js" defer></script>
+    <script src="mydetails.js"></script>
+</body>
+
+</html>
