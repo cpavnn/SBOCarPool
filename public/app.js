@@ -37,7 +37,7 @@ function handleRedirect() {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            console.log('this is the change');
+            // console.log('this is the change');
 
             createUserIfDoesntExist();
         } else {
@@ -81,12 +81,12 @@ function createUser() {
 
 
 function createUserIfDoesntExist() {
-    console.log('*****************************checking', getCurrentUserUID());
+    // console.log('*****************************checking', getCurrentUserUID());
     var user = getFirebaseRef().child("users").child(getCurrentUserUID());
 
     user.once('value', function (snapshot) {
 
-        console.log('snapshot', snapshot.val());
+        //console.log('snapshot', snapshot.val());
         if (snapshot.val()) {
             console.log('user exists');
             if (snapshot.val().isVerified) {
@@ -211,9 +211,12 @@ function verifyTheUserToken() {
         var currentUser = getCurrentUserUID();
         var firebaseUserToken = firebase.auth().currentUser.getToken();
         var verifyTokenURL = 'https://us-central1-sbo-car-pool.cloudfunctions.net/verifyToken';
+        var fbToken = firebaseUserToken;
         firebase.auth().currentUser.getToken(/* forceRefresh */ true).then(function (firebaseUserToken) {
-            fetch(verifyTokenURL, {
+            console.log('calling fetch');
+            fbToken = firebaseUserToken;
 
+            fetch(verifyTokenURL, {
                 'method': 'POST',
                 'headers': {
                     'Authorization': 'Bearer ' + firebaseUserToken,
@@ -231,10 +234,13 @@ function verifyTheUserToken() {
                 hideSpinner(verifyTokenAnimate, 'VERIFY');
             });
 
+
+
         }).catch(function (error) {
-            console.error('error in reading', error);
-            alert('Error! Please try after some time');
-            hideSpinner(verifyTokenAnimate, 'VERIFY');
+            console.error('error in getting token', error);
+            // alert('Error! Please try after some time');
+            // hideSpinner(verifyTokenAnimate, 'VERIFY');
+            makeAjaxCallout('POST', verifyTokenURL, fbToken, JSON.stringify({ 'uid': currentUser, 'token': receivedToken }));
         });
     } else {
         alert('Enter a value in the token field');
@@ -243,11 +249,36 @@ function verifyTheUserToken() {
 
 
 }
+function makeAjaxCallout(methodType, endpointURI, token, body) {
+    console.log('ajax callout', methodType, endpointURI, token, body);
+    $.ajax({
+        type: methodType,
+        url: endpointURI,
+
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        },
+        data: body,
+        success: function (response) {
+
+            console.info('success', response)
+            listenForIsVerified();
+        },
+        error: function (response) {
+
+            console.info('error', response);
+            alert('Error!! Please try after some time', response);
+            hideSpinner(verifyTokenAnimate, 'VERIFY');
+        }
+    });
+
+}
+
 
 function listenForIsVerified() {
     console.log('in listen');
     getFirebaseRef().child("users").child(getCurrentUserUID()).child('isVerified').once('value', function (snapshot) {
-        console.log('listen snapshot', snapshot);
         console.log('listen snapshot', snapshot.val());
         if (snapshot.val()) {
             console.log('========user verified=========');

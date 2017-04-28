@@ -212,7 +212,7 @@ function removeCurrentSuggestions() {
 /* -------------------------------------------------------------- */
 function populateTable(carpooluser, carpooluserKey) {
 
-    var HTMLCard = '<div onclick=\"prepareTheRequest(this);\" class="col-md-4 userInfoCard"  data-userkey=' + carpooluserKey + ' data-usermailid= ' + carpooluser.shellMailId + '><div class="suggestionsCard col-md-12"> <div class="mailIdInfo" > ' + carpooluser.shellMailId + ' </div> <div class="pd3"> <span> ' + carpooluser.car + ' </span> <span style="float: right;"> ' + carpooluser.vehicleNumber + '</span> </div> <div class="pd3"> Going to:  <span> ' + ' JP Nagar ' + '</span> </div> <div class="pd3"> Leaves Home at: <span> ' + carpooluser.leaveHomeAt + '</span> </div><div class="pd3"> Leaves Office at: <span> ' + carpooluser.leaveOfficeAt + '</span> </div> <div> <button class="requestBtn"> request </button> </div> </div> </div> ';
+    var HTMLCard = '<div onclick=\"prepareTheRequest(this);\" class="col-md-4 userInfoCard"  data-userkey=' + carpooluserKey + ' data-usermailid= ' + carpooluser.shellMailId + '><div class="suggestionsCard col-md-12"> <div class="mailIdInfo" > ' + carpooluser.shellMailId + ' </div> <div class="pd3"> <span> ' + carpooluser.car + ' </span> <span style="float: right;"> ' + carpooluser.vehicleNumber + '</span> </div> <div class="pd3"> Going to:  <span> ' + carpooluser.homeLocation + '</span> </div> <div class="pd3"> Leaves Home at: <span> ' + carpooluser.leaveHomeAt + '</span> </div><div class="pd3"> Leaves Office at: <span> ' + carpooluser.leaveOfficeAt + '</span> </div> <div> <button class="requestBtn"> request </button> </div> </div> </div> ';
     console.log('creating card');
     if (j$('.NoDataFound').is(":visible")) {
         console.log('removing no data found');
@@ -506,7 +506,7 @@ function prepareTheRequest(requestToUser) {
 
 
 function openMailWindow(mailToId) {
-    var mailWindow = window.open("mailto:" + mailToId + '&subject= New passenger request' + '&body=Hello! %0A%0AI would like to join with you for the carpool.%0A %0A Thanks!');
+    var mailWindow = window.open("mailto:" + mailToId + '?subject= New passenger request' + '&body=Hello! %0A%0AI would like to join with you for the carpool.%0A %0A Thanks!');
     setTimeout(function () {
         try {
             mailWindow.close();
@@ -554,13 +554,12 @@ function checkIfAlreadyRequested() {
                 j$("#Rmail").text(requestedToUser.val().shellMailId);
                 j$("#Rcar").text(requestedToUser.val().car);
                 j$("#Rnum").text(requestedToUser.val().vehicleNumber);
-                //$("#Rhome").text(requestedToUser.home);
+                j$("#Rhome").text(requestedToUser.val().homeLocation);
                 j$("#Rleavehome").text(requestedToUser.val().leaveHomeAt);
                 j$("#Rleaveoff").text(requestedToUser.val().leaveOfficeAt);
 
 
-            }).then(function (success) {
-                console.log('this is the ');
+            }).then(function (success) {                
                 j$(".exisitingRequest").css("top", "60px");
             });
 
@@ -611,7 +610,7 @@ function handleRedirect() {
 
 }
 
-var homePageURL = 'https://car-pool-8d29c.firebaseapp.com';
+var homePageURL = 'https://sbo-car-pool.firebaseapp.com';
 function signOut() {
     if (getCurrentUser()) {
         firebase.auth().signOut().then(function () {
@@ -631,7 +630,8 @@ function redirect(URL) {
 
 j$('.navbar-toggle').on('click', function () {
     console.log('===', typeof j$(".exisitingRequest").css("top"));
-    j$(".exisitingRequest").css("top") == "200px" ? j$(".exisitingRequest").css("top", "60px") : j$(".exisitingRequest").css("top", "200px");
+    if(j$(".exisitingRequest").css("top") != "-360px")
+        j$(".exisitingRequest").css("top") == "200px" ? j$(".exisitingRequest").css("top", "60px") : j$(".exisitingRequest").css("top", "200px");
 
 
 

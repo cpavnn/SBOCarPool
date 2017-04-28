@@ -1465,7 +1465,7 @@ function handleRedirect() {
 
 }
 
-var homePageURL = 'https://car-pool-8d29c.firebaseapp.com';
+var homePageURL = 'https://sbo-car-pool.firebaseapp.com';
 function signOut() {
     if (getCurrentUser()) {
         firebase.auth().signOut().then(function () {
