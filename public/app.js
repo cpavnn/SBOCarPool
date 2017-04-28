@@ -5,8 +5,9 @@ if ('serviceWorker' in navigator) {
 }
 
 
-
 /***************FIREBASE **********************/
+
+var signInWithGoogle = 'SIGN IN WITH GOOGLE';
 
 function login() {
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -31,7 +32,7 @@ function handleRedirect() {
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
-        hideSpinner(signInAnimate, 'SIGN IN WITH GOOGLE');
+        hideSpinner(signInAnimate, signInWithGoogle);
     });
 
 
@@ -43,7 +44,7 @@ function handleRedirect() {
         } else {
             // No user is signed in.
             console.log('no user');
-            hideSpinner(signInAnimate, 'SIGN IN WITH GOOGLE');
+            hideSpinner(signInAnimate, signInWithGoogle);
         }
     });
 
@@ -71,7 +72,7 @@ function createUser() {
     var currentUser = getCurrentUser();
     var users = getFirebaseRef().child("users");
     users.child(currentUser.uid).set({
-        personalEmail: getCurrentUserEmail()
+        personalEmail: 'personalEmail',
     }).then(function (sucess) {
         $("#myModalVerifyUser").modal();
     }).catch(function (error) {
@@ -81,12 +82,12 @@ function createUser() {
 
 
 function createUserIfDoesntExist() {
-    // console.log('*****************************checking', getCurrentUserUID());
+  
     var user = getFirebaseRef().child("users").child(getCurrentUserUID());
 
     user.once('value', function (snapshot) {
 
-        //console.log('snapshot', snapshot.val());
+  
         if (snapshot.val()) {
             console.log('user exists');
             if (snapshot.val().isVerified) {
@@ -96,17 +97,7 @@ function createUserIfDoesntExist() {
 
             } else {
                 $("#myModalVerifyUser").modal();
-                //bringupmodalwindow
-                //place to enter shell mail id
-                //send mail button
-                //function to store the mail id and verification token against user
-                //send mail
-                //second screen to verify token
-                //verify button
-                //call to function 
-                //redirect from function
-
-
+               
             }
         }
         else {
@@ -114,10 +105,10 @@ function createUserIfDoesntExist() {
 
         }
     }).then(function (success) {
-        console.log('isVerified read successful');
+        
     }).catch(function (error) {
         console.log('Error isVerified read ', error);
-        hideSpinner(signInAnimate, 'SIGN IN WITH GOOGLE');
+        hideSpinner(signInAnimate, signInWithGoogle);
     });
 }
 
@@ -135,10 +126,10 @@ function signOut() {
                 $('.modal-backdrop').hide();
             }
 
-            hideSpinner(signInAnimate, 'SIGN IN WITH GOOGLE');
+            hideSpinner(signInAnimate, signInWithGoogle);
         }).catch(function (error) {
             // An error happened.
-            hideSpinner(signInAnimate, 'SIGN IN WITH GOOGLE');
+            hideSpinner(signInAnimate, signInWithGoogle);
         });
     }
 
@@ -210,10 +201,11 @@ function verifyTheUserToken() {
 
         var currentUser = getCurrentUserUID();
         var firebaseUserToken = firebase.auth().currentUser.getToken();
+        //TODO : REPLACE THE VERIFY TOKEN CLOUD FUNTION URL
         var verifyTokenURL = 'https://us-central1-sbo-car-pool.cloudfunctions.net/verifyToken';
         var fbToken = firebaseUserToken;
         firebase.auth().currentUser.getToken(/* forceRefresh */ true).then(function (firebaseUserToken) {
-            console.log('calling fetch');
+          
             fbToken = firebaseUserToken;
 
             fetch(verifyTokenURL, {
@@ -293,15 +285,10 @@ function listenForIsVerified() {
 }
 
 
-
-
-
-
-
 function redirect() {
     console.log('in redirect');
-    var myDetailsURL = '/mydetails.html';
-    window.location = myDetailsURL;
+    var requestrideURL = '/requestride.html';
+    window.location = requestrideURL;
 }
 
 window.onload = function () {

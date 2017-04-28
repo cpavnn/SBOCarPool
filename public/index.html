@@ -36,7 +36,7 @@
     <script src="jquery.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <link rel="stylesheet" href="app.css" />
-    <title>SBO Car Pool</title>
+   
 
 </head>
 
@@ -56,7 +56,7 @@
                     </button>
 
 
-                    <h4 class="navbar-text btop navHead  logText">SBO Car Pool</h4>
+                <h4 class="navbar-text btop navHead  logText">SBO Car Pool</h4>
 
 
             </div>
@@ -99,12 +99,12 @@
                     <div class="form-group nopd col-md-12" style="padding-top: 15px;">
                         <label for="email">ENTER YOUR SHELL EMAIL ID</label>
                         <div class="input-group">
-                            <input Class="form-control" id="userShellMailId" placeholder="Shell Email Id" type="text" />
+                            <input class="form-control" id="userShellMailId" placeholder="Shell Email Id" type="text" />
                             <span class="input-group-addon" id="basic-addon3">@shell.com</span>
                         </div>
                     </div>
                     <div class="form-group col-md-4 nopd pdtop15 ">
-                        <input Class="form-control btn btn-shell-df" onclick="saveShellMailId();" type="button" value="VERIFY MAIL" />
+                        <input class="form-control btn btn-shell-df" onclick="saveShellMailId();" type="button" value="VERIFY MAIL" />
                     </div>
                 </div>
                 <div class="modal-footer techBug signout-modalfooter" onclick="signOut();">
@@ -124,24 +124,21 @@
                 <div class="modal-body col-sm-12 modal-body-upcoming" id="verifyTokenModalBody">
                     <div class="form-group input-group col-md-12" style="padding-top: 15px;padding-right: 15px;">
                         <label for="email" id="emailIdPlaceHolder">ENTER THE TOKEN RECEIVED TO YOUR SHELL EMAIL ID: </label>
-                        <input Class="form-control" id="usertoken" placeholder="Enter the token" type="number" />
+                        <input class="form-control" id="usertoken" placeholder="Enter the token" type="number" />
 
 
                     </div>
                     <div class="form-group col-md-4 nopd pdtop15 ">
-                        <button Class="form-control btn btn-shell-df" onclick="verifyTheUserToken();">                            
+                        <button class="form-control btn btn-shell-df" onclick="verifyTheUserToken();">                            
                             <span> VERIFY </span>
                             <span id="verifyTokenAnimate" class="glyphicon glyphicon-repeat glyphicon-refresh-animate"></span>
                         </button>
-                        <!--<button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>-->
+
                     </div>
                 </div>
                 <div class="modal-footer techBug signout-modalfooter" onclick="signOut();">
                     Signout
                 </div>
-                <!--<div class="modal-footer techBug">                    
-                    In case you dont receive the token to your email id within 5 minutes, please contact the team its a techincal bug.
-                </div>-->
             </div>
         </div>
     </div>
@@ -197,21 +194,21 @@
                         <div class="col-sm-12">
 
                             <div class="col-sm-3 center ">
-                                <img class="img-circle imga"  src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"                               />
+                                <img class="img-circle imga" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
                                 <div class="persDetails">Aashish</div>
                             </div>
                             <div class="col-sm-1">
 
                             </div>
                             <div class="col-sm-3 center ">
-                                <img class="img-circle imga"  src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"/>
+                                <img class="img-circle imga" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
                                 <div class="persDetails">Pavan</div>
                             </div>
                             <div class="col-sm-1">
 
                             </div>
                             <div class="col-sm-3 center ">
-                                <img class="img-circle imga"  src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"/>
+                                <img class="img-circle imga" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
                                 <div class="persDetails"> Rohan </div>
                             </div>
                             <div class="col-sm-1">
@@ -230,8 +227,8 @@
     </div>
 
     <div style="position: fixed;z-index: -99;width: 100%;height: 100%;background: url('/icons/WW89650_low.jpg') no-repeat center center fixed;background-size: cover;">
-        
-            
+
+
     </div>
 
 
@@ -253,12 +250,12 @@
 
                 </div>
                 <div class="form-group col-md-12 nopd pdtop15 ">
-                    <button Class="form-control btn btn-shell-df" onclick="login();" disabled>                            
+                    <button class="form-control btn btn-shell-df" onclick="login();" disabled>                            
                             <span>  </span>
                             <span id="signInAnimate" class="glyphicon glyphicon-repeat glyphicon-refresh-animate"></span>
-                        </button>
-
                     </button>
+
+                  
 
                 </div>
 
@@ -278,182 +275,29 @@
 
 <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
 <script>
-                                                                           var config = {
-                                                                               apiKey: "AIzaSyBdT4TvGUX8m4hIN2hin0j4-JGm9oE7ZFw",
-                                                                               authDomain: "sbo-car-pool.firebaseapp.com",
-                                                                               databaseURL: "https://sbo-car-pool.firebaseio.com",
-                                                                               projectId: "sbo-car-pool",
-                                                                               storageBucket: "sbo-car-pool.appspot.com",
-                                                                               messagingSenderId: "588518243561"
-                                                                           };
-                                                                           firebase.initializeApp(config);
+    var config = {
+        apiKey: "AIzaSyBdT4TvGUX8m4hIN2hin0j4-JGm9oE7ZFw",
+        authDomain: "sbo-car-pool.firebaseapp.com",
+        databaseURL: "https://sbo-car-pool.firebaseio.com",
+        projectId: "sbo-car-pool",
+        storageBucket: "sbo-car-pool.appspot.com",
+        messagingSenderId: "588518243561"
+    };
+    firebase.initializeApp(config);
 
 </script>
-
-
 <script>
-                                                                           {
+    //disable closing of modal on verify email and token
+    $('#myModalVerifyUser').on('hide.bs.modal', function (e) {
 
+        e.preventDefault();
 
-                                                                           }
-                                                                           if (false == true) {
-                                                                               var searchRides = '<li class=\"btoph\" > <a id=\"searchRides\" class=\"navHead\" href=\"requestride.html\" onclick=\"\">Search Rides </a>  </li>';
-                                                                               $(searchRides).insertAfter($("#addH"));
-                                                                           }
+    });
+    $('#myModalVerifyToken').on('hide.bs.modal', function (e) {
 
-                                                                           if (false == true) {
-                                                                               var ht = '<li class=\"btoph\" > <a class=\"navHead\" href=\"mydetails.html\" onclick=\"aa();\"> My Details </a>  </li>';
-                                                                               $(ht).insertAfter($("#addH"));
-                                                                           }
+        e.preventDefault();
 
-                                                                           if (false == true) {
-                                                                               var logout = ' <ul class=\"nav navbar-nav navbar-right\"> <li class=\"btoph\"> <a class=\"navHead\" href=\"#\" onclick=\"logout_js();\" > Logout </a> </li> </ul>';
-                                                                               $(logout).insertAfter($("#leftItems"));
-                                                                           }
-
-
-                                                                           if (false == true) {
-                                                                               var logout =
-                                                                                   ' <ul class=\"nav navbar-nav navbar-right\"> <li class=\"btoph\"> <a class=\"navHead\" href=\"#\" onclick=\"\"  > Take Tour</a> </li>  <li class=\"btoph\"> <a class=\"navHead\" href=\"#\" onclick=\"logout_js();\" > Logout </a> </li> </ul>';
-                                                                               $(logout).insertAfter($("#leftItems"));
-                                                                           }
-
-                                                                           // MENU LOADER END
-
-
-                                                                           // VALIDATE INPUTS
-                                                                           function validate(ele) {
-                                                                               if (ele.value) {
-                                                                                   ele.style.outline = 'none';
-                                                                               } else
-                                                                                   ele.style.outline = "1px solid red";
-                                                                           }
-
-                                                                           function registerUser() {
-                                                                               var regname = document.getElementById('regusr');
-                                                                               var regpwd = document.getElementById('regpwd');
-
-
-                                                                               validate(regname);
-                                                                               validate(regpwd);
-
-
-                                                                               if (regname.value.length > 0 && regpwd.value.length > 0) {
-
-                                                                                   CarPoolCntrl.registerAndCreateUser(regname.value, regpwd.value, function (result, event) {
-                                                                                       if (event.status) {
-                                                                                           alert(result);
-
-                                                                                       } else {
-                                                                                           alert('Registration unsuccessful');
-                                                                                       }
-                                                                                   });
-
-                                                                               }
-                                                                           }
-
-                                                                           function showLogin() {
-
-
-                                                                               document.getElementById('lg').className = 'curp  selectedd';
-                                                                               document.getElementById('rg').className = 'curp notselectedd';
-
-                                                                               var lgn = document.getElementById('lgn');
-                                                                               lgn.style.transition = "all 4s";
-                                                                               lgn.style.display = 'block';
-
-                                                                               var rgn = document.getElementById('reg');
-                                                                               rgn.style.transition = "all 4s";
-                                                                               rgn.style.display = 'none';
-
-                                                                               document.getElementById('lgDiv').className = 'half bbottom2';
-                                                                               document.getElementById('rgDiv').className = 'half';
-
-
-
-                                                                           }
-
-                                                                           function showReg() {
-
-                                                                               document.getElementById('lg').className = 'curp notselectedd';
-                                                                               document.getElementById('rg').className = 'curp selectedd';
-
-                                                                               var lgn = document.getElementById('lgn');
-                                                                               lgn.style.transition = "display 4s";
-                                                                               lgn.style.display = 'none';
-
-                                                                               var rgn = document.getElementById('reg');
-                                                                               rgn.style.transition = "display 4s";
-                                                                               rgn.style.display = 'block';
-
-                                                                               document.getElementById('lgDiv').className = 'half';
-                                                                               document.getElementById('rgDiv').className = 'half bbottom2';
-
-                                                                           }
-
-
-                                                                           // SHOW AND HIDE PASSWORD
-
-                                                                           $('.unmask').on('click', function () {
-
-                                                                               if ($('.pwdCls').attr('type') == 'password') {
-
-                                                                                   changeType($('.pwdCls'), 'text');
-                                                                                   $(this).addClass('glyphicon-eye-open').removeClass('glyphicon-eye-close');
-                                                                               } else {
-                                                                                   changeType($('.pwdCls'), 'password');
-                                                                                   $(this).addClass('glyphicon-eye-close').removeClass('glyphicon-eye-open');
-                                                                               }
-                                                                               return false;
-                                                                           });
-
-
-
-                                                                           function changeType(x, type) {
-                                                                               if (x.prop('type') == type)
-                                                                                   return x; //That was easy.
-                                                                               try {
-                                                                                   return x.prop('type', type); //Stupid IE security will not allow this
-                                                                               } catch (e) {
-                                                                                   //Try re-creating the element (yep... this sucks)
-                                                                                   //jQuery has no html() method for the element, so we have to put into a div first
-                                                                                   var html = $("<div>").append(x.clone()).html();
-                                                                                   var regex = /type=(\")?([^\"\s]+)(\")?/; //matches type=text or type="text"
-                                                                                   //If no match, we add the type attribute to the end; otherwise, we replace
-                                                                                   var tmp = $(html.match(regex) == null ?
-                                                                                       html.replace(">", ' type="' + type + '">') :
-                                                                                       html.replace(regex, 'type="' + type + '"'));
-                                                                                   //Copy data from old element
-                                                                                   tmp.data('type', x.data('type'));
-                                                                                   var events = x.data('events');
-                                                                                   var cb = function (events) {
-                                                                                       return function () {
-                                                                                           //Bind all prior events
-                                                                                           for (i in events) {
-                                                                                               var y = events[i];
-                                                                                               for (j in y)
-                                                                                                   tmp.bind(i, y[j].handler);
-                                                                                           }
-                                                                                       }
-                                                                                   } (events);
-                                                                                   x.replaceWith(tmp);
-                                                                                   setTimeout(cb, 10); //Wait a bit to call function
-                                                                                   return tmp;
-                                                                               }
-                                                                           }
-
-
-                                                                           //disable closing of modal on verify email and token
-                                                                           $('#myModalVerifyUser').on('hide.bs.modal', function (e) {
-
-                                                                               e.preventDefault();
-
-                                                                           });
-                                                                           $('#myModalVerifyToken').on('hide.bs.modal', function (e) {
-
-                                                                               e.preventDefault();
-
-                                                                           });
+    });
 
 </script>
 <script src="app.js">

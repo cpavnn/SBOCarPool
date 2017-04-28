@@ -1,8 +1,3 @@
-function logout_js() {
-
-    logout();
-}
-
 
 var thisIsClickedButton;
 
@@ -84,12 +79,6 @@ function closeNav() {
 
     }
 } /* ---------------------------------------------------------------- */
-
-/*********READ NO OF ROUTES**************************************** */
-
-
-
-/*********READ NO OF ROUTES END**************************************** */
 
 
 var noOfRoutes = '0';
@@ -287,51 +276,9 @@ function drawRoute() {
 
     drawUserRoute();
 
-} /* ---------------------------------------------------------------- */
+} 
+/* ---------------------------------------------------------------- */
 
-function drawroute1() {
-    if (renderer) {
-        renderer.setMap(null);
-        cleargmarker();
-    }
-    clearstDet();
-    clearRenderer();
-    stDet.push({
-        'Geometry': {
-            'Latitude': 12.916740281532835,
-            'Longitude': 77.62879733095497
-        }
-    });
-    stDet.push({
-        'Geometry': {
-            'Latitude': 12.905940728306534,
-            'Longitude': 77.58829358442892
-        }
-    });
-    drawUserRoute();
-} /* ---------------------------------------------------------------- */
-
-function drawroute2() {
-    if (renderer) {
-        renderer.setMap(null);
-        cleargmarker();
-    }
-    clearstDet();
-    clearRenderer();
-    stDet.push({
-        'Geometry': {
-            'Latitude': 12.863978,
-            'Longitude': 77.531376
-        }
-    });
-    stDet.push({
-        'Geometry': {
-            'Latitude': 12.943896,
-            'Longitude': 77.580054
-        }
-    });
-    drawUserRoute();
-} /* ---------------------------------------------------------------- */
 
 function clearRenderer() {
     if (directionsDisplay) {
@@ -356,6 +303,7 @@ function drawUserRoute() {
         window.tour.calcRoute(directionsService, directionsDisplay);
 } /* ---------------------------------------------------------------- */
 
+//TODO SET THE CITY CENTRE'S GEO CODE
 const city = {};
 city.lat = 12.9681417;
 city.lng = 77.6119801;
@@ -537,6 +485,7 @@ function ginit() {
     });
 } /* ---------------------------------------------------------------- */
 
+//TODO SET THE STARTING POINT
 const office = {};
 office.lat = 12.925962;
 office.lng = 77.685824
@@ -709,24 +658,8 @@ callctr = function (loadRoute) {
 };
 
 
-removeRoute = function (routNo) {
-    A4J.AJAX.Submit('j_id0:j_id37', null, {
-        'similarityGroupingId': 'j_id0:j_id37:j_id44',
-        'parameters': {
-            'j_id0:j_id37:j_id44': 'j_id0:j_id37:j_id44',
-            'routNo': (typeof routNo != 'undefined' && routNo != null) ? routNo : ''
-        }
-    })
-};
-updateActive = function (routNu) {
-    A4J.AJAX.Submit('j_id0:j_id37', null, {
-        'similarityGroupingId': 'j_id0:j_id37:j_id46',
-        'parameters': {
-            'j_id0:j_id37:j_id46': 'j_id0:j_id37:j_id46',
-            'routNu': (typeof routNu != 'undefined' && routNu != null) ? routNu : ''
-        }
-    })
-};
+
+
 saveEmpRequest = function (veh, cap, vehnum, homeLoc, leaveTo, leaveFrom) {
 
     var currentUserKey = getCurrentUserUID();
@@ -749,16 +682,8 @@ saveEmpRequest = function (veh, cap, vehnum, homeLoc, leaveTo, leaveFrom) {
 
 
 };
-logout = function () {
-    A4J.AJAX.Submit('j_id0:j_id37', null, {
-        'similarityGroupingId': 'j_id0:j_id37:j_id54',
-        'parameters': {
-            'j_id0:j_id37:j_id54': 'j_id0:j_id37:j_id54'
-        }
-    })
-};
 
-
+/* FIREBASE */
 
 function getFirebaseRef() {
     return firebase.database().ref();
@@ -826,10 +751,7 @@ function fr_populateRouteMarkers(rtMarks) {
     console.log('this is the length', rtMarks.length);
 
     if (rtMarks.length > 0) {
-        // toggleSearch('hidden');
-        // clearSelectedClass(' card routeButton valgn ');
-
-
+        
         if (renderer) {
             renderer.setMap(null);
             cleargmarker();
@@ -921,13 +843,6 @@ function fr_routePointsToArray(routePts) {
 }
 
 
-
-
-
-
-
-
-
 /*************************** RENDER EXISTING ROUTES END*************************/
 
 
@@ -978,8 +893,6 @@ function removeExistingActiveKeysFromUserRoute(listofKeys) {
     }).catch(function (error) {
         console.log('error', error);
     });
-
-
 
 
 
@@ -1072,7 +985,7 @@ function storeTheRouteAndRoutePoints(gcodes) {
         var selectedElement = document.getElementsByClassName('selected');
         selectedElement[0].parentNode.id = key;
 
-        console.log('=====>>>', document.getElementById(key));
+      
         toggleActiveClass();
     });
 
@@ -1464,7 +1377,7 @@ function handleRedirect() {
 
 
 }
-
+//TODO: SET THE LOGIN PAGE URL
 var homePageURL = 'https://sbo-car-pool.firebaseapp.com';
 function signOut() {
     if (getCurrentUser()) {

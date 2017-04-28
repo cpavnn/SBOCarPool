@@ -12,25 +12,6 @@ function requestTheUserForRide(requestToUser) {
 
 }
 
-function requestRide_js(spanId) {
-
-
-
-    var previousRequests = document.getElementsByClassName('reqst');
-    if (previousRequests) {
-        for (var ll = 0; ll < previousRequests.length; ll++) {
-            previousRequests[ll].style.color = '#747474';
-        }
-    }
-    var reqButon = document.getElementById(spanId);
-
-    reqButon.style.color = '#009211';
-    var reqTomailId = 'todo';//reqButon.parentNode.previousSibling.innerHTML;
-
-    var mailWindow = window.open("mailto:" + reqTomailId + '&subject= New passenger request' + '&body=Hello! %0A%0AI would like to join with you for the carpool.%0A %0A Thanks!');
-    mailWindow.close();
-    requestRide(spanId);
-}
 
 
 /* ---------------------------------------------------------------- */
@@ -60,15 +41,13 @@ var coordArr = [];
 var markers = [];
 
 var isMarkerChanged = true;
-var myTb = setTheTable();
-myTb.clear().draw();
+
 /* ---------------------------------------------------------------- */
 var listObj;
 
 function suggest(proximity) {
 
-    openNav();
-    closeNav();
+
     clearuidList();
     removeCurrentSuggestions();
     if (markers.length > 0 && isMarkerChanged && coordArr.length) {
@@ -78,7 +57,7 @@ function suggest(proximity) {
         openNav();
 
         //SHOW SPINNER
-        disableDropdown();
+
 
         var coordinates = coordArr[0].toString().split(',');
 
@@ -159,10 +138,6 @@ function runGeoQuery() {
             userRef.once('value').then(function (snapshot) {
 
                 if ((snapshot.val().remainingSeats > 0 || !snapshot.hasChild('remainingSeats')) && snapshot.key !== getCurrentUserUID()) {
-                    //Add to UI FROM HERE
-                    //console.log('===', snapshot.val());
-
-                    //var location = new google.maps.LatLng(lat,lng);
 
                     populateTable(snapshot.val(), snapshot.key);
 
@@ -250,12 +225,6 @@ function populateTable(carpooluser, carpooluserKey) {
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "100%";
-    if (opened === 0) {
-        opened = 1;
-        setTimeout(function () {
-            setTheTable();
-        }, 400);
-    }
 }
 
 
@@ -271,18 +240,6 @@ var j$;
 
 function setTheTable() {
     j$ = jQuery.noConflict();
-    var myTabl = j$('#myTablea').DataTable({
-        "destroy": true,
-        "scrollY": '50vh',
-        "scrollCollapse": true,
-        "paging": false,
-
-        "info": false,
-        "bFilter": false,
-
-    });
-    j$('.dataTables_scrollBody').css('height', '500px');
-    return myTabl;
 
 }
 
@@ -436,7 +393,7 @@ function requestForTheRide(requestTo) {
 
         firebaseRef.once('value').then(function (snapshot) {
             console.log('', snapshot.val());
-          
+
             if (snapshot.val()) {
                 if (snapshot.val().requestedTo === requestTo) {
                     //REQUESTING FOR ALREADY REQUESTED PERSON
@@ -467,7 +424,10 @@ function updateRemainingSeats(userId, counter) {
     }).then(function (sucess) {
         closeNav();
         checkIfAlreadyRequested();
-
+        if (requestToUser.getAttribute('data-usermailid')){
+            var mailToId = requestToUser.getAttribute('data-usermailid');
+            openMailWindow(mailToId);
+        }
     }).catch(function (error) {
         console.log('error', error);
     });
@@ -491,11 +451,9 @@ function updateRequests(firebaseRef, requestTo) {
 
 function prepareTheRequest(requestToUser) {
 
-    if (requestToUser.getAttribute('data-usermailid') && requestToUser.getAttribute('data-userkey')) {
-
-        var mailToId = requestToUser.getAttribute('data-usermailid');
+    if (requestToUser.getAttribute('data-userkey')) {
         var requestToKey = requestToUser.getAttribute('data-userkey');
-        openMailWindow(mailToId);
+
         requestForTheRide(requestToKey);
     } else {
         console.warn('requestto user has missing params');
@@ -559,7 +517,7 @@ function checkIfAlreadyRequested() {
                 j$("#Rleaveoff").text(requestedToUser.val().leaveOfficeAt);
 
 
-            }).then(function (success) {                
+            }).then(function (success) {
                 j$(".exisitingRequest").css("top", "60px");
             });
 
@@ -600,7 +558,7 @@ function handleRedirect() {
         } else {
             // No user is signed in.
             console.log('no user');
-             redirect(homePageURL);
+            redirect(homePageURL);
 
         }
     });
@@ -614,7 +572,7 @@ var homePageURL = 'https://sbo-car-pool.firebaseapp.com';
 function signOut() {
     if (getCurrentUser()) {
         firebase.auth().signOut().then(function () {
-            
+
             redirect(homePageURL);
 
         }).catch(function (error) {
@@ -630,7 +588,7 @@ function redirect(URL) {
 
 j$('.navbar-toggle').on('click', function () {
     console.log('===', typeof j$(".exisitingRequest").css("top"));
-    if(j$(".exisitingRequest").css("top") != "-360px")
+    if (j$(".exisitingRequest").css("top") != "-360px")
         j$(".exisitingRequest").css("top") == "200px" ? j$(".exisitingRequest").css("top", "60px") : j$(".exisitingRequest").css("top", "200px");
 
 
