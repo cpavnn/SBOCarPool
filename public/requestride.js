@@ -424,10 +424,7 @@ function updateRemainingSeats(userId, counter) {
     }).then(function (sucess) {
         closeNav();
         checkIfAlreadyRequested();
-        if (requestToUser.getAttribute('data-usermailid')){
-            var mailToId = requestToUser.getAttribute('data-usermailid');
-            openMailWindow(mailToId);
-        }
+       
     }).catch(function (error) {
         console.log('error', error);
     });
@@ -455,6 +452,11 @@ function prepareTheRequest(requestToUser) {
         var requestToKey = requestToUser.getAttribute('data-userkey');
 
         requestForTheRide(requestToKey);
+        if (requestToUser.getAttribute('data-usermailid')){
+            var mailToId = requestToUser.getAttribute('data-usermailid');
+            openMailWindow(mailToId); 
+            
+        }
     } else {
         console.warn('requestto user has missing params');
     }
@@ -586,6 +588,8 @@ function redirect(URL) {
     window.location = URL;
 }
 
+j$ = jQuery.noConflict();
+
 j$('.navbar-toggle').on('click', function () {
     console.log('===', typeof j$(".exisitingRequest").css("top"));
     if (j$(".exisitingRequest").css("top") != "-360px")
@@ -597,5 +601,6 @@ j$('.navbar-toggle').on('click', function () {
 window.onload = function () {
     loadScript();
     handleRedirect();
+    
 
 };

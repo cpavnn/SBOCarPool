@@ -552,7 +552,7 @@ td {
         padding-left: 5px;
     }
      .hopscotchNav{
-        display: none;
+        display: none !important;
     }
 }
 
@@ -616,7 +616,7 @@ td {
         width: auto;
     }
     .hopscotchNav{
-        display: none;
+         display: none !important;
     }
     .suggestionsCard {
         box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5), 0 2px 5px 0 rgba(0, 0, 0, 0.24);
