@@ -54,7 +54,8 @@ Principles
 		
 		Yes! I accept Its a stupid solution 
 		But a good starting point though
-	
+		users might mark on the wrong side of the road, handle this
+		
 	Iteration 2 : Integrated with Places API Service
 				  Made maps fill up the whole page
 				  UI changes (My details under collapseable side bar)
@@ -68,8 +69,7 @@ Principles
 				 Clicking anywhere on the map and hit search
 				 Show the information people who are going near that point
 	
-		This time I dint show anything to rohan
-		
+				
 	The Searching problem !!
 	How do we search ??!!
 		
@@ -77,7 +77,21 @@ Principles
 	
 	We need to build our own
 	
-	By this time you Computer science guys among might have realised this is a typical TSP
+	1st solution
+	Trying out brute force algorithms
+	For all the people offering rides
+	Point 1 office 
+	Point 2 user destination
+	Point 3 Driver destination
+	
+	Calculate distance between Point 1 and 3 
+	Calculate the distance between Point 1 and 3 passing through point 2
+	Take the difference 
+	sort as per the least deviation
+	
+	This time I dint show anything to rohan for obvious reasons
+	
+	By this time you Computer science guys among us might have realised this is a typical TSP
 	
 	Travelling salesman problem - NP Complete
 	
@@ -85,37 +99,40 @@ Principles
 	
 	Our case - TSP without the weights just the nodes
 	
-	Only way to solve NP Complete problem is by all or some of the below point
+	--LESSONS IN LIFE WILL BE REPEATED UNTIL THEY ARE LEARNED--
+	
+	Only way to solve NP Complete problem is by doing all or some of the below points
 	
 	
-	Approximation: Instead of searching for an optimal solution, search for a solution that is at most a factor from an optimal one.
-	Randomization:
+	Approximation
+	Randomization
 	Parameterization
-	Restriction: By restricting the structure of the input (e.g., to planar graphs), faster algorithms are usually possible.
+	Restriction: By restricting the structure of the input , faster algorithms are usually possible.
+	
+	This was the most crucial part in solving the problem
+	RESTRICTION
+	
+	What do we restrict and how do we restrict?
+		
+	I came up with a simple but an effective solution
+		
+	Putting markers approximately everymile along the route,
+	so that whenever the user searches we can calculate the proximity
+	But challenge
+	Google API allows only 8 way points(markers) between origin and destination.
+	
+	Somehow we were able to overcome this problem.
+	Simple search was through Haversine's distance
+		
 	
 	The evolution of CSS
-	
-	put TSP and the research done the papers
-	and introduction to NP hard problem
-	
-	Challenges 8 way points cant mark mile marker
-	
-	The initial schema diagram
-		Every time I am going some kind of event everyday
-		Rohan - what nonsense
-	Put up schema diagram
-	
-	
-	users might mark on the wrong side of the road, handle this
-
-
-	instead of saving route points every km
-	calculate the distance the distance from source to destination with the route points
-
 	
 	Great idea when can we make this live
 	Can you sponsor hosting costs
 	Bye
+	
+	
+	-- You may have to fight a battle more than once to win it --
 Protoype to Solution
 which tech
 	all accounts right from heroku,aws,azure,mongo,droplet etc etc 
