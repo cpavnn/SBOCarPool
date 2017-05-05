@@ -1,0 +1,205 @@
+You are free to ask questions
+you are allowed to question if you have a better and a cheaper solution
+
+Intro
+
+	Motivation for building the app
+
+The initial protoype on salesforce
+Why salesforce
+	I am a salesforce developer 
+	
+Principles 
+
+	Solve the fundamental problem	Connect people together
+	Responsive design 
+	Must be based google maps
+	Simplify user onboarding
+	Collect minimal information 
+	Less intervention from people who are offering ride
+	
+	Great we need GMaps API to begin with
+		Google Maps Directions API
+		Google Maps Distance Matrix API 4
+		Google Maps Geocoding API
+	
+	What all services do we need from API
+		Geocoding service
+		Reverse geocoding
+		Directions service (complex)
+		Travel modes in directions
+		Waypoints in directions
+		Draggable directions
+		Distance Matrix service
+		Place autocomplete
+		ETC ETC
+		
+	Now I realise I dont anything about Google Maps API!
+		
+	Anyway I started
+	3 Pages
+		Login
+		Details of person who is offering the ride
+		Search for rides
+		
+	Priority
+		1) Capture information of person who is offering ride
+		2) Develop the search page
+		3) Login page
+		
+	Started with capturing infomation, related to person who is offering the ride
+	Iteration 1: Click some landmarks along your route fill in your details and save
+		
+		Showed this to rohan - I got excellent feedback - ITS STUPID !!
+		
+		Yes! I accept Its a stupid solution 
+		But a good starting point though
+	
+	Iteration 2 : Integrated with Places API Service
+				  Made maps fill up the whole page
+				  UI changes (My details under collapseable side bar)
+				  Ability to have multiple routes
+		
+		Showed this to rohan - I got excellent feedback - Now its acceptable
+		
+	Now that we had completed (almost) the capturing user info part, we moved on to search rides module
+	
+	Iteration 1: Just the UI
+				 Clicking anywhere on the map and hit search
+				 Show the information people who are going near that point
+	
+		This time I dint show anything to rohan
+		
+	The Searching problem !!
+	How do we search ??!!
+		
+	There is no Google maps api to search :P
+	
+	We need to build our own
+	
+	By this time you Computer science guys among might have realised this is a typical TSP
+	
+	Travelling salesman problem - NP Complete
+	
+	Explaing TSP ----TO DO-----
+	
+	Our case - TSP without the weights just the nodes
+	
+	Only way to solve NP Complete problem is by all or some of the below point
+	
+	
+	Approximation: Instead of searching for an optimal solution, search for a solution that is at most a factor from an optimal one.
+	Randomization:
+	Parameterization
+	Restriction: By restricting the structure of the input (e.g., to planar graphs), faster algorithms are usually possible.
+	
+	The evolution of CSS
+	
+	put TSP and the research done the papers
+	and introduction to NP hard problem
+	
+	Challenges 8 way points cant mark mile marker
+	
+	The initial schema diagram
+		Every time I am going some kind of event everyday
+		Rohan - what nonsense
+	Put up schema diagram
+	
+	
+	users might mark on the wrong side of the road, handle this
+
+
+	instead of saving route points every km
+	calculate the distance the distance from source to destination with the route points
+
+	
+	Great idea when can we make this live
+	Can you sponsor hosting costs
+	Bye
+Protoype to Solution
+which tech
+	all accounts right from heroku,aws,azure,mongo,droplet etc etc 
+	evaluation of firebase
+	intro to serverless
+	mindfk
+	took 2 months
+
+Grand vision
+
+
+Be able to build things
+
+We are moving from producers to consumers
+It was really sad among the 20+ people I met in the IT hub were all non technical
+I couldnt find people who have worked on NOSQL databases
+THE PROBLEM
+	
+	People dont who stays ;
+
+
+When you live for a strong purpose, hardwork is not an option but necessary
+
+To be able to sacrifice what you are to what you become
+
+Mention list of blog posts went through
+
+
+INTRO OF FIREBASE
+
+WELL HE IS A SALESFORCE DEVELOPER
+
+2 days multi routes
+1 day sending mail
+node, captcha authorise
+1 day verifying the token
+
+handling CORS
+
+returning http response from async
+
+schema evoloution
+
+child cannot restrict access
+
+Taking token write to another node for security
+
+return promise vs http://stackoverflow.com/questions/43098952/cloud-functions-for-firebase-suddenly-timing-out?rq=1
+
+Blog posts
+https://mhaligowski.github.io/blog/2017/03/10/cors-in-cloud-functions.html
+
+https://uxtools-3ac6e.firebaseapp.com/library/
+
+NOSQL
+https://blogs.msdn.microsoft.com/pathelland/2007/07/23/normalization-is-for-sissies/
+
+83b665104c362f19a9b57234907531c31c4a43e8
+
+If you could have you would have
+
+No questions on technology stack, 
+you are allowed to ask a question if you think your proposal will be cheaper than 10$ to run unlimited users
+
+Its never a technical challenge (ofcourse its difficult problem to solve TSP)
+
+Not a booking platform
+
+In programming the hard part isnt solving problems, but deciding what problems to solve
+to be able to sacrifice what you are
+
+apps are greedy, apps are meant to display ads
+
+
+
+three principles
+	cheap to run 
+	zero maintainance
+	zero admin/operation tasks
+	experimental features
+	data transer minimal=========
+	
+	I am the boss
+	
+	If i can change you can change everyone can change - rocky
+	
+	Less than 10$ per month at peak usage
