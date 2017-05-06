@@ -123,19 +123,48 @@ Principles
 	
 	Somehow we were able to overcome this problem.
 	Simple search was through Haversine's distance
+	
+	intergrated with UI
+	this was the output
+	
+	The evolution of UI
+	Somehow I was not comfortable with my details user information
+	after design changes this is how it looked
+	
+	-- put screenshot --
+	
+	designed the login page and registration page
+	
+	-- put screenshot --
+	
+	18-09-2016 The development box was created
+	21-10-2016 Fully functional app was ready on salesforce
+	
+	I had other regular project to work on as well, 
+	this was developed whenever i got some free time.
+	
+	I did a demo to couple of guys.
+	
+	Everyone's feedback had a similar theme.
+	
+	
+	Bosses: Great app this is much required,when can we make this live?
+	Me: Can you sponsor ap hosting cost
+	Bosses: Bye!
+	
+	I left it there, 
+	I did my job
+	
+	Somehow I pursued this a lot (one of the very few things in life I pursued.)
 		
 	
-	The evolution of CSS
-	
-	Great idea when can we make this live
-	Can you sponsor hosting costs
-	Bye
-	
-	
 	-- You may have to fight a battle more than once to win it --
-Protoype to Solution
+	The journey from a Protoype to Solution
+	
+	I started exploring alternate techologies which would be cheaper to run
+
 which tech
-	all accounts right from heroku,aws,azure,mongo,droplet etc etc 
+	all accounts right from heroku,aws,azure,mongo,droplet,stamplay etc etc 
 	evaluation of firebase
 	intro to serverless
 	mindfk
