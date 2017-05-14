@@ -5,7 +5,8 @@
                 /* this should be only cloud functions */
                 ".write": "auth != null",
                 "token": {
-                    ".read": "auth != null"
+                    ".read": "auth != null",
+                  	".validate" : "auth.uid == 'some-uid'"
                 },
                 "$other": {
                     ".validate": "auth != null"
@@ -25,7 +26,7 @@
                 },
                 "capacity": {
                     //make capacity a number
-                    //".validate": "newData.isNumber() && newData.val() < 9"
+                    ".validate": "newData.isNumber() && newData.val() < 9"
                 },
                 "car": {
                     ".validate": "newData.isString() && newData.val().length < 30"
@@ -48,6 +49,7 @@
         "userroutes": {
             ".read": "auth != null",
             ".write": "auth != null",
+            ".indexOn": "g",
             "$uid": {
                 ".validate": "$uid.beginsWith(auth.uid)",
                 ".indexOn": "g"
@@ -57,7 +59,8 @@
             "$uid": {
                 ".read": "$uid == auth.uid",
                 ".write": "$uid == auth.uid",
-                ".indexOn": "isDeleted"
+                ".indexOn": ["isDeleted", "isActive"]
+                  
             }
         },
         "requests": {

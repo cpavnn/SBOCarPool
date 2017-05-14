@@ -175,14 +175,8 @@ function enableDropdown() {
     // document.getElementById('proximityList').removeAttribute("disabled");
 }
 
-function removeCurrentSuggestions() {
-    var currentSuggestions = document.getElementsByClassName('userInfoCard');
-
-    if (currentSuggestions) {
-        for (var i = 0; i < currentSuggestions.length; i++) {
-            currentSuggestions[i].remove();
-        }
-    }
+function removeCurrentSuggestions() {   
+    j$('.userInfoCard').remove();
 }
 /* -------------------------------------------------------------- */
 function populateTable(carpooluser, carpooluserKey) {
@@ -191,32 +185,9 @@ function populateTable(carpooluser, carpooluserKey) {
     console.log('creating card');
     if (j$('.NoDataFound').is(":visible")) {
         console.log('removing no data found');
-        j$('.NoDataFound').hide();
+        j$('.NoDataFound').remove();
     }
     j$(HTMLCard).insertAfter(j$("#proximityBar"));
-
-
-    // if (listObj.length > 2) {
-    //     geocoder.geocode({
-    //         'location': listObj[2]
-    //     }, function (results, status) {
-    //         if (status === 'OK') {
-    //             if (results.length > 1) {
-    //                 destination = results[1].formatted_address;
-    //                 destination = destination.replace('Bengaluru, Karnataka', '');
-    //                 destination = destination.replace('India', '');
-
-    //             }
-    //         } else {
-
-
-    //         }
-    //     });
-    // } else {
-    //     enableDropdown();
-    // }
-
-
 
 }
 
