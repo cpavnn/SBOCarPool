@@ -254,7 +254,7 @@ function makeAjaxCallout(methodType, endpointURI, token, body) {
         data: body,
         success: function (response) {
 
-            console.info('success', response)
+            console.info('success', response);
             listenForIsVerified();
         },
         error: function (response) {

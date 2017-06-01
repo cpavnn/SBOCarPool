@@ -1,4 +1,4 @@
-const version = 'carpoolv1.0';
+const version = 'carpoolv1.1';
 
 self.addEventListener('install', function (event) {
     self.skipWaiting();
@@ -39,7 +39,7 @@ self.addEventListener('activate', function (event) {
             return caches.delete(key);
         }));
       }));
-})
+});
 
 self.addEventListener('fetch', function (event) {
     event.respondWith(
@@ -49,5 +49,5 @@ self.addEventListener('fetch', function (event) {
                 
 
             })
-    )
+    );
 });

@@ -146,7 +146,7 @@ function runGeoQuery() {
                 console.log('finished reading ');
                 enableDropdown();
             }).catch(function (error) {
-                console.log('error reading user data: ', error)
+                console.log('error reading user data: ', error);
             });
 
         }
@@ -175,7 +175,7 @@ function enableDropdown() {
     // document.getElementById('proximityList').removeAttribute("disabled");
 }
 
-function removeCurrentSuggestions() {   
+function removeCurrentSuggestions() {
     j$('.userInfoCard').remove();
 }
 /* -------------------------------------------------------------- */
@@ -395,7 +395,7 @@ function updateRemainingSeats(userId, counter) {
     }).then(function (sucess) {
         closeNav();
         checkIfAlreadyRequested();
-       
+
     }).catch(function (error) {
         console.log('error', error);
     });
@@ -423,10 +423,10 @@ function prepareTheRequest(requestToUser) {
         var requestToKey = requestToUser.getAttribute('data-userkey');
 
         requestForTheRide(requestToKey);
-        if (requestToUser.getAttribute('data-usermailid')){
+        if (requestToUser.getAttribute('data-usermailid')) {
             var mailToId = requestToUser.getAttribute('data-usermailid');
-            openMailWindow(mailToId); 
-            
+            openMailWindow(mailToId);
+
         }
     } else {
         console.warn('requestto user has missing params');
@@ -524,10 +524,25 @@ function handleRedirect() {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            console.log('this is the change');
-            initialiseGeoQuery();
-            clearuidList();
-            checkIfAlreadyRequested();
+            var firebaseRef = getFirebaseRef().child('users').child(getCurrentUserUID()).child('isVerified');
+            firebaseRef.once('value').then(function (snapshot) {
+                console.log('snapshot',snapshot);
+                if (snapshot.val()) {
+
+                    console.log('this is snapshot val',snapshot.val());
+                    initialiseGeoQuery();
+                    clearuidList();
+                    checkIfAlreadyRequested();
+
+                } else {
+                    // No user is signed in.
+                    console.log('no user');
+                    redirect(homePageURL);
+
+                }
+            }).catch (function (error) {
+                console.log('error in reading is verified',error);
+            });
         } else {
             // No user is signed in.
             console.log('no user');
@@ -572,6 +587,6 @@ j$('.navbar-toggle').on('click', function () {
 window.onload = function () {
     loadScript();
     handleRedirect();
-    
+
 
 };

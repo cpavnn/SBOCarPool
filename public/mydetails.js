@@ -53,7 +53,7 @@ function checkFields() {
 
     console.log('**', vehicleName.value, vehicleCapacity.value, vehicleNum.value, homeLocation.value, leaveTo.value, leaveFrom.value);
 
-    saveEmpRequest(vehicleName.value, vehicleCapacity.value, vehicleNum.value, homeLocation.value, leaveTo.value, leaveFrom.value);
+    saveEmpRequest(vehicleName.value, parseInt(vehicleCapacity.value), vehicleNum.value, homeLocation.value, leaveTo.value, leaveFrom.value);
 
 }
 
@@ -276,7 +276,7 @@ function drawRoute() {
 
     drawUserRoute();
 
-} 
+}
 /* ---------------------------------------------------------------- */
 
 
@@ -488,7 +488,7 @@ function ginit() {
 //TODO SET THE STARTING POINT
 const office = {};
 office.lat = 12.925962;
-office.lng = 77.685824
+office.lng = 77.685824;
 
 function fun(dest) {
     var routes = [{
@@ -616,7 +616,7 @@ function gMilestone(route, dist, opts) {
         pos;
     for (var p = 1; p < path.length; ++p) {
         leg = Math.round(geo.computeDistanceBetween(point, path[p]));
-        d1 = distance + 0
+        d1 = distance + 0;
         distance += leg;
         overflow = dist - (d1 % dist);
         if (distance >= dist && leg >= overflow) {
@@ -751,7 +751,7 @@ function fr_populateRouteMarkers(rtMarks) {
     console.log('this is the length', rtMarks.length);
 
     if (rtMarks.length > 0) {
-        
+
         if (renderer) {
             renderer.setMap(null);
             cleargmarker();
@@ -985,7 +985,7 @@ function storeTheRouteAndRoutePoints(gcodes) {
         var selectedElement = document.getElementsByClassName('selected');
         selectedElement[0].parentNode.id = key;
 
-      
+
         toggleActiveClass();
     });
 
@@ -1303,7 +1303,7 @@ function fr_displayMyDetails() {
     var vehicleName = document.getElementById('j_id0:detailFrm:vehicle');
     var vehicleCapacity = document.getElementById('j_id0:detailFrm:capacity');
     var vehicleNum = document.getElementById('j_id0:detailFrm:vehicleNum');
-    var homeLocation = document.getElementById('j_id0:detailFrm:homeLoc')
+    var homeLocation = document.getElementById('j_id0:detailFrm:homeLoc');
     var leaveTo = document.getElementById('j_id0:detailFrm:leaveTo');
     var leaveFrom = document.getElementById('j_id0:detailFrm:leaveFrom');
 
@@ -1361,16 +1361,32 @@ function handleRedirect() {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            console.log('this is the change');
-            fr_addExistingRoutes();
-            fr_displayMyDetails();
+            var firebaseRef = getFirebaseRef().child('users').child(getCurrentUserUID()).child('isVerified');
+            firebaseRef.once('value').then(function (snapshot) {
+                console.log('snapshot', snapshot);
+                if (snapshot.val()) {
 
+                    console.log('this is snapshot val', snapshot.val());
+                    fr_addExistingRoutes();
+                    fr_displayMyDetails();
+
+                } else {
+                    // No user is signed in.
+                    console.log('no user');
+                    redirect(homePageURL);
+
+                }
+            }).catch(function (error) {
+                console.log('error in reading is verified', error);
+            });
         } else {
             // No user is signed in.
             console.log('no user');
             redirect(homePageURL);
 
         }
+
+
     });
 
 
@@ -1382,7 +1398,7 @@ var homePageURL = 'https://sbo-car-pool.firebaseapp.com';
 function signOut() {
     if (getCurrentUser()) {
         firebase.auth().signOut().then(function () {
-            
+
             redirect(homePageURL);
 
         }).catch(function (error) {

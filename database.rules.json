@@ -6,7 +6,7 @@
                 ".write": "auth != null",
                 "token": {
                     ".read": "auth != null",
-                  	".validate" : "auth.uid == 'some-uid'"
+                    ".validate": "auth.uid == 'some-uid'"
                 },
                 "$other": {
                     ".validate": "auth != null"
@@ -15,12 +15,13 @@
         },
         "users": {
             "$uid": {
-                ".read": "auth != null",
+                ".read": "$uid == auth.uid || root.child('users').child(auth.uid).child('isVerified').val() == true",
                 ".write": "$uid == auth.uid",
                 "shellMailId": {
                     ".validate": "$uid == auth.uid && newData.val().endsWith('@shell.com')"
                 },
                 "isVerified": {
+                    ".read": "auth != null",
                     ".write": true,
                     ".validate": "newData.isBoolean() && auth.uid != $uid"
                 },
@@ -59,8 +60,10 @@
             "$uid": {
                 ".read": "$uid == auth.uid",
                 ".write": "$uid == auth.uid",
-                ".indexOn": ["isDeleted", "isActive"]
-                  
+                ".indexOn": [
+                    "isDeleted",
+                    "isActive"
+                ]
             }
         },
         "requests": {

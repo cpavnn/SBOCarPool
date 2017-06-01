@@ -53,7 +53,7 @@ exports.prepareVerificationMail = functions.database.ref('/users/{uid}/shellMail
     console.log('event data', event.data);
     console.log('event data val', event.data.val());
     if (event.data && event.data.val() != null) {
-      return event.data.ref.parent.once('value').then(function (snapshot) {
+      return event.data.adminRef.parent.once('value').then(function (snapshot) {
         console.log('snapval is the user id', snapshot.key);
         var userId = snapshot.key;
         //console.log('this is the userId', userId);
@@ -91,7 +91,7 @@ exports.setTheToken = functions.database.ref('/users/{uid}/personalEmail')
     console.log(typeof event.data.val());
     if (event.data.val() != null) {
       //
-      return event.data.ref.parent.once('value').then(function (snapshot) {
+      return event.data.adminRef.parent.once('value').then(function (snapshot) {
         console.log('snapval is the user id', snapshot.key);
         var userId = snapshot.key;
         //console.log('this is the userId', userId);
@@ -149,7 +149,7 @@ exports.removeActiveRequests = functions.https.onRequest((req, res) => {
   return firebaseRef.once('value').then(function (snapshot) {
     snapshot.forEach(function (child) {
       if (userSeatsToUpdate.indexOf(child.val().requestedTo) < 0) {
-        userSeatsToUpdate.push(child.val().requestedTo)
+        userSeatsToUpdate.push(child.val().requestedTo);
       }
     });
     return userSeatsToUpdate;
@@ -268,7 +268,7 @@ exports.setRemainingSeatsOnCapacityChange = functions.database.ref('/users/{uid}
     var userId = '';
 
     if (event.data && event.data.val() != null) {
-      return event.data.ref.parent.once('value').then(function (snapshot) {
+      return event.data.adminRef.parent.once('value').then(function (snapshot) {
         console.log('snapval is the user id', snapshot.key);
         userId = snapshot.key;
         console.log('userid',userId);
