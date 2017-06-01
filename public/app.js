@@ -168,7 +168,7 @@ var signInAnimate = 'signInAnimate';
 function loadSpinner(elementId) {
     var verifyTokenAnimate = document.getElementById(elementId);
     if (verifyTokenAnimate) {
-        verifyTokenAnimate.previousSibling.previousSibling.innerHTML = '';
+        verifyTokenAnimate.previousSibling.previousSibling.innerText = '';
         verifyTokenAnimate.style.visibility = 'visible';
         verifyTokenAnimate.parentNode.disabled = true;
     }
@@ -177,7 +177,7 @@ function loadSpinner(elementId) {
 function hideSpinner(elementId, verificationMessage) {
     var verifyTokenAnimate = document.getElementById(elementId);
     if (verifyTokenAnimate) {
-        verifyTokenAnimate.previousSibling.previousSibling.innerHTML = verificationMessage;
+        verifyTokenAnimate.previousSibling.previousSibling.innerText = verificationMessage;
         verifyTokenAnimate.style.visibility = 'hidden';
         verifyTokenAnimate.parentNode.disabled = false;
     }

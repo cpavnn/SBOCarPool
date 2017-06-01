@@ -1,5 +1,5 @@
 function logout_js() {
-    logout();
+    
 }
 
 function requestConfirmation() {
@@ -11,23 +11,6 @@ function requestTheUserForRide(requestToUser) {
     console.log('in user request ride', requestToUser);
 
 }
-
-
-
-/* ---------------------------------------------------------------- */
-function openMyDetails_js() {
-    openMyDetails();
-}
-
-function openSearch_js() {
-    openSearch();
-}
-
-
-
-/* ---------------------------------------------------------------- */
-
-
 
 var searchCoords;
 
@@ -458,15 +441,6 @@ requestRide = function (reqId) {
         'parameters': {
             'j_id0:j_id26:j_id29': 'j_id0:j_id26:j_id29',
             'reqId': (typeof reqId != 'undefined' && reqId != null) ? reqId : ''
-        }
-    })
-};
-
-logout = function () {
-    A4J.AJAX.Submit('j_id0:j_id26', null, {
-        'similarityGroupingId': 'j_id0:j_id26:j_id31',
-        'parameters': {
-            'j_id0:j_id26:j_id31': 'j_id0:j_id26:j_id31'
         }
     })
 };
