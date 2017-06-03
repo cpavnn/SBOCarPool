@@ -25,6 +25,12 @@ function alertSaved() {
     alert('Saved');
 }
 
+function alertError() {
+    alert('Error! Please enter valid data');
+}
+
+
+
 function validate(ele) {
     if (ele.value) {
         ele.style.outline = 'none';
@@ -678,6 +684,7 @@ saveEmpRequest = function (veh, cap, vehnum, homeLoc, leaveTo, leaveFrom) {
         alertSaved();
     }).catch(function (error) {
         console.log('error', error);
+        alertError();
     });
 
 

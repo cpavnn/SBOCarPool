@@ -5,20 +5,21 @@
                 /* this should be only cloud functions */
                 ".write": "auth != null",
                 "token": {
-                    ".read": "auth != null",
+                    ".read": "auth.uid == 'some-uid'",
                     ".validate": "auth.uid == 'some-uid'"
                 },
                 "$other": {
-                    ".validate": "auth != null"
+                    ".read": false,
+                    ".write": false
                 }
             }
         },
         "users": {
             "$uid": {
                 ".read": "$uid == auth.uid || root.child('users').child(auth.uid).child('isVerified').val() == true",
-                ".write": "$uid == auth.uid",
+                ".write": "$uid == auth.uid || root.child('users').child(auth.uid).child('isVerified').val() == true",
                 "shellMailId": {
-                    ".validate": "$uid == auth.uid && newData.val().endsWith('@shell.com')"
+                    ".validate": "$uid == auth.uid && newData.val().endsWith('@shell.com') && !newData.val().contains('<')  && !newData.val().contains('(')"
                 },
                 "isVerified": {
                     ".read": "auth != null",
@@ -26,30 +27,36 @@
                     ".validate": "newData.isBoolean() && auth.uid != $uid"
                 },
                 "capacity": {
-                    //make capacity a number
                     ".validate": "newData.isNumber() && newData.val() < 9"
                 },
                 "car": {
-                    ".validate": "newData.isString() && newData.val().length < 30"
+                    ".validate": "newData.isString() && newData.val().length < 30 && !newData.val().contains('<')  && !newData.val().contains('(')"
+                },
+                "homeLocation": {
+                    ".validate": "newData.isString() && newData.val().length < 50 && !newData.val().contains('<')  && !newData.val().contains('(')"
                 },
                 "remainingSeats": {
                     //".validate": "newData.val() > -1",
                     ".write": "$uid != auth.uid"
                 },
                 "vehicleNumber": {
-                    ".validate": "newData.val().length < 15"
+                    ".validate": "newData.val().length < 15 && !newData.val().contains('<')  && !newData.val().contains('(')"
+                },
+                "$other": {
+                    ".read": false,
+                    ".write": false
                 }
             }
         },
         "activeRoutes": {
             "$uid": {
-                ".read": "$uid == auth.uid",
-                ".write": "$uid == auth.uid"
+                ".read": "root.child('users').child(auth.uid).child('isVerified').val() == true",
+                ".write": "root.child('users').child(auth.uid).child('isVerified').val() == true",
             }
         },
         "userroutes": {
-            ".read": "auth != null",
-            ".write": "auth != null",
+            ".read": "root.child('users').child(auth.uid).child('isVerified').val() == true",
+            ".write": "root.child('users').child(auth.uid).child('isVerified').val() == true",
             ".indexOn": "g",
             "$uid": {
                 ".validate": "$uid.beginsWith(auth.uid)",
@@ -58,8 +65,8 @@
         },
         "routes": {
             "$uid": {
-                ".read": "$uid == auth.uid",
-                ".write": "$uid == auth.uid",
+                ".read": "root.child('users').child(auth.uid).child('isVerified').val() == true",
+                ".write": "root.child('users').child(auth.uid).child('isVerified').val() == true",
                 ".indexOn": [
                     "isDeleted",
                     "isActive"
@@ -67,12 +74,16 @@
             }
         },
         "requests": {
-            ".read": "auth != null",
+            ".read": "root.child('users').child(auth.uid).child('isVerified').val() == true",
             "$uid": {
-                ".read": "auth != null",
-                ".write": "$uid == auth.uid",
+                ".read": "root.child('users').child(auth.uid).child('isVerified').val() == true",
+                ".write": "$uid == auth.uid && root.child('users').child(auth.uid).child('isVerified').val() == true",
                 ".indexOn": "requestedTo"
             }
+        },
+        "$other": {
+            ".read": false,
+            ".write": false
         }
     }
 }

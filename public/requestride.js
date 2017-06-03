@@ -161,10 +161,28 @@ function enableDropdown() {
 function removeCurrentSuggestions() {
     j$('.userInfoCard').remove();
 }
+var tagsToReplace = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;'
+};
+
+function replaceTag(tag) {
+    return tagsToReplace[tag] || tag;
+}
+
+function safe_tags_replace(str) {
+    return str.replace(/[&<>]/g, replaceTag);
+}
+
+
 /* -------------------------------------------------------------- */
 function populateTable(carpooluser, carpooluserKey) {
 
-    var HTMLCard = '<div onclick=\"prepareTheRequest(this);\" class="col-md-4 userInfoCard"  data-userkey=' + carpooluserKey + ' data-usermailid= ' + carpooluser.shellMailId + '><div class="suggestionsCard col-md-12"> <div class="mailIdInfo" > ' + carpooluser.shellMailId + ' </div> <div class="pd3"> <span> ' + carpooluser.car + ' </span> <span style="float: right;"> ' + carpooluser.vehicleNumber + '</span> </div> <div class="pd3"> Going to:  <span> ' + carpooluser.homeLocation + '</span> </div> <div class="pd3"> Leaves Home at: <span> ' + carpooluser.leaveHomeAt + '</span> </div><div class="pd3"> Leaves Office at: <span> ' + carpooluser.leaveOfficeAt + '</span> </div> <div> <button class="requestBtn"> request </button> </div> </div> </div> ';
+    //var HTMLCard = '<div onclick=\"prepareTheRequest(this);\" class="col-md-4 userInfoCard"  data-userkey=' + carpooluserKey + ' data-usermailid= ' + carpooluser.shellMailId + '><div class="suggestionsCard col-md-12"> <div class="mailIdInfo" > ' + carpooluser.shellMailId + ' </div> <div class="pd3"> <span> ' + carpooluser.car + ' </span> <span style="float: right;"> ' + carpooluser.vehicleNumber + '</span> </div> <div class="pd3"> Going to:  <span> ' + carpooluser.homeLocation + '</span> </div> <div class="pd3"> Leaves Home at: <span> ' + carpooluser.leaveHomeAt + '</span> </div><div class="pd3"> Leaves Office at: <span> ' + carpooluser.leaveOfficeAt + '</span> </div> <div> <button class="requestBtn"> request </button> </div> </div> </div> ';
+    var HTMLCard = '<div onclick=\"prepareTheRequest(this);\" class="col-md-4 userInfoCard"  data-userkey=' + safe_tags_replace(carpooluserKey) + ' data-usermailid= ' + safe_tags_replace(carpooluser.shellMailId) + '><div class="suggestionsCard col-md-12"> <div class="mailIdInfo" > ' + safe_tags_replace(carpooluser.shellMailId) + ' </div> <div class="pd3"> <span> ' + safe_tags_replace(carpooluser.car) + ' </span> <span style="float: right;"> ' + safe_tags_replace(carpooluser.vehicleNumber) + '</span> </div> <div class="pd3"> Going to:  <span> ' + safe_tags_replace(carpooluser.homeLocation) + '</span> </div> <div class="pd3"> Leaves Home at: <span> ' + safe_tags_replace(carpooluser.leaveHomeAt) + '</span> </div><div class="pd3"> Leaves Office at: <span> ' + safe_tags_replace(carpooluser.leaveOfficeAt) + '</span> </div> <div> <button class="requestBtn"> request </button> </div> </div> </div> ';
+    
+    
     console.log('creating card');
     if (j$('.NoDataFound').is(":visible")) {
         console.log('removing no data found');
