@@ -51,7 +51,7 @@
         "activeRoutes": {
             "$uid": {
                 ".read": "root.child('users').child(auth.uid).child('isVerified').val() == true",
-                ".write": "root.child('users').child(auth.uid).child('isVerified').val() == true",
+                ".write": "root.child('users').child(auth.uid).child('isVerified').val() == true"
             }
         },
         "userroutes": {
