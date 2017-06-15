@@ -121,8 +121,8 @@ function runGeoQuery() {
             userRef.once('value').then(function (snapshot) {
 
                 if ((snapshot.val().remainingSeats > 0 || !snapshot.hasChild('remainingSeats')) && snapshot.key !== getCurrentUserUID()) {
-
-                    populateTable(snapshot.val(), snapshot.key);
+                    if(typeof snapshot.val().car !== "undefined")
+                     populateTable(snapshot.val(), snapshot.key);
 
                 }
             }).then(function (success) {
@@ -172,7 +172,9 @@ function replaceTag(tag) {
 }
 
 function safe_tags_replace(str) {
-    return str.replace(/[&<>]/g, replaceTag);
+    
+    if(typeof str !== "undefined")
+        return str.replace(/[&<>]/g, replaceTag);
 }
 
 
@@ -370,12 +372,13 @@ function requestForTheRide(requestTo) {
                 if (snapshot.val().requestedTo === requestTo) {
                     //REQUESTING FOR ALREADY REQUESTED PERSON
                     //PUT A SNACKBAR
+                    closeNav();
                     console.log('put a snackbar REQUESTING FOR ALREADY REQUESTED PERSON');
                     return;
                 }
                 console.log('val', snapshot.val());
                 //increase number of seats the counter then call update
-                updateRemainingSeats(snapshot.val().requestedTo, 1);
+                //updateRemainingSeats(snapshot.val().requestedTo, 1);
                 updateRequests(firebaseRef, requestTo);
                 //run the transaction
             } else {
@@ -394,9 +397,7 @@ function updateRemainingSeats(userId, counter) {
     firebaseRef.transaction(function (remainingSeats) {
         return remainingSeats + counter;
     }).then(function (sucess) {
-        closeNav();
-        checkIfAlreadyRequested();
-
+       
     }).catch(function (error) {
         console.log('error', error);
     });
@@ -409,10 +410,12 @@ function updateRequests(firebaseRef, requestTo) {
         //Just the id or the whole info			
         requestedTo: requestTo,
     }).then(function (result) {
+        closeNav();
+        checkIfAlreadyRequested();
         //send push notification
         //run transaction decrement and increment
         //DO A COLOR ENCODING FOR REQUESTED RIDE WITH LITTLE ANIMATION COLOR GRADUAL CHANGE
-        updateRemainingSeats(requestTo, -1);
+        //updateRemainingSeats(requestTo, -1);
 
     });
 }
@@ -425,8 +428,8 @@ function prepareTheRequest(requestToUser) {
 
         requestForTheRide(requestToKey);
         if (requestToUser.getAttribute('data-usermailid')) {
-            var mailToId = requestToUser.getAttribute('data-usermailid');
-            openMailWindow(mailToId);
+            //var mailToId = requestToUser.getAttribute('data-usermailid');
+            //openMailWindow(mailToId);
 
         }
     } else {
@@ -437,15 +440,8 @@ function prepareTheRequest(requestToUser) {
 }
 
 
-function openMailWindow(mailToId) {
-    var mailWindow = window.open("mailto:" + mailToId + '?subject= New passenger request' + '&body=Hello! %0A%0AI would like to join with you for the carpool.%0A %0A Thanks!');
-    setTimeout(function () {
-        try {
-            mailWindow.close();
-        } catch (err) { }
-
-    }, 1200);
-
+function openMailWindow() {
+   j$("#Rmail").get(0).click();
 
 }
 
@@ -474,7 +470,7 @@ function checkIfAlreadyRequested() {
             requestedToRef.once('value').then(function (requestedToUser) {
                 console.log('this is the user', requestedToUser.val());
 
-                j$("#Rmail").text(requestedToUser.val().shellMailId);
+                j$("#Rmail").attr("href","mailto:"+ requestedToUser.val().shellMailId).text(requestedToUser.val().shellMailId);
                 j$("#Rcar").text(requestedToUser.val().car);
                 j$("#Rnum").text(requestedToUser.val().vehicleNumber);
                 j$("#Rhome").text(requestedToUser.val().homeLocation);
@@ -570,9 +566,14 @@ j$ = jQuery.noConflict();
 
 j$('.navbar-toggle').on('click', function () {
     console.log('===', typeof j$(".exisitingRequest").css("top"));
-    if (j$(".exisitingRequest").css("top") != "-360px")
-        j$(".exisitingRequest").css("top") == "200px" ? j$(".exisitingRequest").css("top", "60px") : j$(".exisitingRequest").css("top", "200px");
-
+     if (j$(".exisitingRequest").css("top") != "-360px") {    
+        if(j$('.navbar-toggle').attr("aria-expanded") == "true")
+            j$(".exisitingRequest").css("top", "60px");
+        else
+            j$(".exisitingRequest").css("top", "200px");
+    }
+    if(j$("#mySidenav").css("width") != "0px")
+        closeNav();
 
 
 });

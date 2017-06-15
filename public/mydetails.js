@@ -1473,6 +1473,14 @@ function startTour() {
     tourDetails();
 }
 
+$('.navbar-toggle').on('click', function () {
+   
+    if($("#myUpnav").css("height") != "0px")
+        closeNav();
+
+
+});
+
 window.onload = function () {
     ginit();
     handleRedirect();

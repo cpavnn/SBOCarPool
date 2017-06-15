@@ -118,17 +118,6 @@ exports.setTheToken = functions.database.ref('/users/{uid}/personalEmail')
     }
   });
 
-exports.checkTheAdminUID = functions.https.onRequest((req, res) => {
-
-  console.log('admin auth()', admin.auth().UserInfo);
-  console.log('admin auth userinfo', admin.auth.UserInfo);
-  console.log('admin auth UserMetadata', admin.auth.UserMetadata);
-  console.log('admin auth UserRecord', admin.auth.UserRecord);
-
-
-  res.status(200).send('ok');
-
-});
 
 exports.removeActiveRequests = functions.https.onRequest((req, res) => {
   const key = req.query.key;
@@ -185,8 +174,8 @@ exports.removeActiveRequests = functions.https.onRequest((req, res) => {
 exports.verifyToken = functions.https.onRequest((req, res) => {
   var corsFn = cors();
   corsFn(req, res, function () {
-     verifyTheUserToken(req, res);
-  
+    verifyTheUserToken(req, res);
+
   });
 });
 
@@ -259,6 +248,46 @@ function verifyTheUserToken(req, res) {
 }
 
 
+exports.handleRequestsForCarpooling = functions.database.ref('/requests/{uid}/')
+  .onWrite(event => {
+
+    console.log('new val', event.data.val());
+    console.log('old val', event.data.previous.val());
+
+    var rootRef = event.data.adminRef.root.child("users");
+
+    if (event.data.val() !== null) {
+      if (event.data.previous.val() !== null) {
+        let firebaseRef = rootRef.child(event.data.previous.val().requestedTo).child('remainingSeats');
+
+        firebaseRef.transaction(function (remainingSeats) {
+          console.log('remainingSeats11111', remainingSeats);
+          return remainingSeats + 1;
+        }).then(function (success) {
+
+          console.log('sucss', success);
+        }).catch(function (error) {
+          console.warn('error', error);
+        });
+      }
+      let firebaseRef = rootRef.child(event.data.val().requestedTo).child('remainingSeats');
+      firebaseRef.transaction(function (remainingSeats) {
+        console.log('remainingSeats', remainingSeats);
+        return remainingSeats - 1;
+      }).then(function (success) {
+
+        console.log('req', success);
+      }).catch(function (error) {
+        console.warn('error', error);
+      });
+    } else {
+      console.log('no data');
+
+    }
+
+  });
+
+
 exports.setRemainingSeatsOnCapacityChange = functions.database.ref('/users/{uid}/capacity')
   .onWrite(event => {
 
@@ -271,7 +300,7 @@ exports.setRemainingSeatsOnCapacityChange = functions.database.ref('/users/{uid}
       return event.data.adminRef.parent.once('value').then(function (snapshot) {
         console.log('snapval is the user id', snapshot.key);
         userId = snapshot.key;
-        console.log('userid',userId);
+        console.log('userid', userId);
         return userId;
       }).then(function (userId) {
         return admin.database().ref().child('requests').orderByChild("requestedTo").equalTo(userId).once('value');
@@ -284,8 +313,8 @@ exports.setRemainingSeatsOnCapacityChange = functions.database.ref('/users/{uid}
           return 0;
       }).then(function (activeRequest) {
         var userRef = admin.database().ref().child("users").child(userId);
-        console.log('this is the capacity',event.data.val());
-        console.log('this is the activeRequest',activeRequest);
+        console.log('this is the capacity', event.data.val());
+        console.log('this is the activeRequest', activeRequest);
         var remainingSeats = event.data.val() - activeRequest;
         return userRef.update({
           remainingSeats: remainingSeats,
@@ -294,7 +323,7 @@ exports.setRemainingSeatsOnCapacityChange = functions.database.ref('/users/{uid}
         console.log('success');
       }).catch(function (error) {
         console.error('error:', error);
-        
+
       });
     }
   });

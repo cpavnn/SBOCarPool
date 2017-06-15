@@ -1,4 +1,4 @@
-const version = 'carpoolv1.4';
+const version = 'carpoolv1.6';
 
 self.addEventListener('install', function (event) {
     self.skipWaiting();
