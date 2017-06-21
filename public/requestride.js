@@ -470,7 +470,8 @@ function checkIfAlreadyRequested() {
             requestedToRef.once('value').then(function (requestedToUser) {
                 console.log('this is the user', requestedToUser.val());
 
-                j$("#Rmail").attr("href","mailto:"+ requestedToUser.val().shellMailId).text(requestedToUser.val().shellMailId);
+                //j$("#Rmail").attr("href","mailto:"+ requestedToUser.val().shellMailId).text(requestedToUser.val().shellMailId);
+                j$("#Rmail").attr("href","mailto:"+ requestedToUser.val().shellMailId + '?subject= New passenger request' + '&body=Hello! %0A%0AI would like to join with you for the carpool.%0A %0A Thanks!').text(requestedToUser.val().shellMailId);
                 j$("#Rcar").text(requestedToUser.val().car);
                 j$("#Rnum").text(requestedToUser.val().vehicleNumber);
                 j$("#Rhome").text(requestedToUser.val().homeLocation);
