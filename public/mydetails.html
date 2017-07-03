@@ -14,7 +14,7 @@
   
 
     <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16"/>
-      
+    <link rel="manifest" href="manifest.json">
     <!--/*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -99,6 +99,88 @@ rgba(0,0,0,.5);border-bottom:17px solid transparent;border-top:17px solid transp
 #fff;border-top:17px solid transparent;position:relative;left:-7px;top:-34px}div.hopscotch-bubble .hopscotch-bubble-arrow-container.right
 .hopscotch-bubble-arrow-border{border-left:17px solid #000;border-left:17px solid rgba(0,0,0,.5);border-bottom:17px solid
 transparent;border-top:17px solid transparent}div.hopscotch-bubble .hopscotch-actions{margin:10px 0 0;text-align:right}
+  a {
+            color: black;
+        }
+
+        a:visited {
+            color: black;
+        }
+
+        a:hover {
+            color: black;
+        }
+
+        a:link {
+            color: black;
+        }
+
+        a:active {
+            color: black;
+        }
+
+        .panel-body b {
+            margin-bottom: 5px;
+            display: block;
+        }
+        .pnl{border-bottom: 1px solid grey !important;}
+                .panel-title {   
+             font-weight: 600;
+        }
+
+         #snackbar, #saved, #noMoreRoutes, #selectRoute, #enterValidData {
+    visibility: hidden;
+}
+
+.snackbar{
+    font-weight: bold;
+	font-variant: small-caps;
+    width:100%;
+    background-color: #323232;
+    color: #fff;
+    text-align: center;
+   
+    padding: 16px;
+    position: fixed;
+    z-index: 50;
+    
+    bottom: 0px;
+    font-size: 17px;
+}
+
+#snackbar.show, #saved.show, #noMoreRoutes.show, #selectRoute.show, #enterValidData.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 0px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 0px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 0px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 0px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+.confirmDialogModalFooter {
+	text-align: right;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 15px;    
+    margin: 10px;
+}	
+
     </style>
 
        
@@ -163,39 +245,437 @@ transparent;border-top:17px solid transparent}div.hopscotch-bubble .hopscotch-ac
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
-                    <h4 class="modal-title">Developed By</h4>
+                    <h4 class="modal-title">FAQ</h4>
                 </div>
 
                 <div class="modal-body col-sm-12 nop">
 
                     <div class="container col-sm-12">
-                        <div class="col-sm-12">
 
-                            <div class="col-sm-3 center ">
-                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
-                                />
-                                <div class="persDetails">Aashish</div>
-                            </div>
-                            <div class="col-sm-1">
+                        <div class="accordionContainer" style="margin-top: 15px;">
 
-                            </div>
-                            <div class="col-sm-3 center ">
-                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
-                                />
-                                <div class="persDetails">Pavan</div>
-                            </div>
-                            <div class="col-sm-1">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                        <div class="panel-heading pnl" style="">
+                                            <h4 class="panel-title">
+                                                WHAT IS THIS APP
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapse1" class="panel-collapse collapse in">
+                                        <div class="panel-body">
 
-                            </div>
-                            <div class="col-sm-3 center ">
-                                <img class="img-circle imga" height="100%" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%"
-                                />
-                                <div class="persDetails"> Rohan </div>
-                            </div>
-                            <div class="col-sm-1">
+                                            <br/>
+                                            <b>
+                                              WHAT IS THIS APP
+                                            </b>
+                                            <p>
+                                                The app tries to solve the fundametal of car pooling i.e. suggesting people who stay near your route, and its upto to person
+                                                who is offering ride and person taking the ride to communicate and plan the
+                                                ride.
+                                            </p>
+                                            <br/>
+
+                                            <b>
+                                              HOW DO I REGISTER 
+                                            </b>
+                                            <p>
+                                                You authorise with Google and verify using the official email id.
+                                            </p>
+
+                                            <br/>
+                                            <b>
+                                                 WHY AUTHORISE VIA GOOGLE
+                                            </b>
+                                            <p>
+                                                Its a better user experience and we dont have build a seperate login module.And its more secure
+
+                                            </p>
+
+                                            <br/>
+                                            <b>
+                                                 WHAT DO YOU STORE FROM GOOGLE
+                                            </b>
+                                            <p>
+                                                Nothing!
+
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                CAN I BOOK A RIDE
+                                            </b>
+                                            <p>
+                                                You dont book a ride, You request for a ride.
+
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 WHAT IS DIFFERENCE BETWEEN BOOKING AND REQUESTING
+                                            </b>
+                                            <p>
+                                                Booking a ride: The app is responsible for  all the things that happen <br/>                                                Request a ride: The scope of the app ends after the suggesting you the ride
+
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 WHY DONT YOU TAKE RESPONSIBILITY
+                                            </b>
+                                            <p>
+                                                Developers dont take any responsibility, Thats the universal truth!
+
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 WHY DOESNT THE APP ALLOCATE ME RIDE AUTOMATICALLY, WHY JUST SUGGEST
+                                            </b>
+                                            <p>
+                                                Developers dont own the car, Its upto the consent of the person who is offering the ride.
+
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 HOW DO I ENSURE MY FELLOW EMPLOYEE PICKS ME UP AT THE RIGHT TIME AND RIGHT PLACE
+                                            </b>
+                                            <p>
+                                                You can communicate well in advance and decide on the place and time, The app doesnt doesnt track the rider or the requestor
+
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 CAN I TRACK MY RIDE
+                                            </b>
+                                            <p>
+                                                No! We havent and we will not implement this feature
+
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 AS A PERSON OFFERING THE RIDE I WANT THE FUEL COSTS TO BE SHARED, HOW DOES THE APP ENSURE THIS
+                                            </b>
+                                            <p>
+                                                The app doesnt suggest what to pay and whom to pay.Every car has different fuel efficieny so we cant have fixed price and
+                                                its not the problem we are trying to solve.
+
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 THIS APP IS NO WAY NEAR WHAT WE GET FROM OF MARKET CAR POOLING APPS, WHY IS IT SO
+                                            </b>
+                                            <p>
+                                                The fundamental problem in car pooling is knowing people who stay near my rotue/home,so we just focus on solving the fundamental
+                                                problem.
+                                                <br/> So we dont do tracking,payments, acceptance,rejection, Gender preference,Rating
+                                                etc etc. More features require more effort and thinking, more bandwidth =
+                                                more money, and we dont have any budget.<br/> Other apps charge you money
+                                                and we wont.
+
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#securityPrivacyId">
+                                        <div class="panel-heading pnl">
+                                            <h4 class="panel-title ">
+                                                SECURITY & PRIVACY
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="securityPrivacyId" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <b>
+                                                 IS THIS APP SECURE
+                                            </b>
+                                            <p>
+                                                We think so, If you find any flaws please catch hold of the developers
+
+                                            </p>
+                                            <br/>
+
+                                            <b>
+                                                 SHOULD I GIVE MY EXACT HOME ADDRESS
+                                            </b>
+                                            <p>
+                                                No need, nearest landmark would do and whatever you give, we store the destination ~1km away (This was bug in implementation,but
+                                                later promoted as a feature)
+                                            </p>
+                                            <br/>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#performanceId">
+                                        <div class="panel-heading pnl">
+                                            <h4 class="panel-title">
+                                                PERFORMANCE
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="performanceId" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <b>
+                                                 IS THIS APP PERFORMANT, HOW MUCH BANDWIDTH IS CONSUMED
+                                            </b>
+                                            <p>
+                                                The whole app is less than 500kb,We measure Time to be Interactive as our metric<br/>                                                On a Moto G (1st Gen) and on Slow 3G network these are the results<br/> Page
+                                                load for the first time takes 3.3 Seconds<br/> Subsquent load takes just
+                                                800 milliseconds<br/> This is possible because of Service Workers!
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#techStackId">
+                                        <div class="panel-heading pnl">
+                                            <h4 class="panel-title">
+                                                TECHNOLOGY STACK
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="techStackId" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <b>
+                                                 WHAT IS THE TECHNOLOGY STACK & WHAT ARE THE TOOLS USED
+                                            </b>
+                                            <p>
+                                                The app is built on Firebase.<br/> Front End:
+                                                <ul style="list-style-type:none">
+                                                    <li>HTML</li>
+                                                    <li>CSS</li>
+                                                    <li>JS</li>
+                                                </ul>
+                                                Lamda Funtions:
+                                                <ul style="list-style-type:none">
+                                                    <li>Node.js</li>
+                                                </ul>
+
+                                                Database:
+                                                <ul style="list-style-type:none">
+                                                    <li>JSON Blob (NOSQL)</li>
+                                                </ul>
+
+                                                Continuous Integration:
+                                                <ul style="list-style-type:none">
+                                                    <li>Travis CI</li>
+                                                </ul>
+
+                                                UI Automation:
+                                                <ul style="list-style-type:none">
+                                                    <li>NightwatchJS</li>
+                                                </ul>
+
+                                                Google Map API's<br/> NPM Modules:
+                                                <ul style="list-style-type:none">
+                                                    <li>PurifyCSS: To remove unused CSS</li>
+                                                    <li>nodemailer: To send verification Token emails</li>
+                                                    <li> cors: middleware to enable CORS handling requests</li>
+                                                    <li> secure-compare:Constant-time comparison algorithm to prevent timing attacks
+                                                        for Node.js</li>
+                                                </ul>
+
+                                                Performance Testing:
+                                                <ul style="list-style-type:none">
+                                                    <li>Lighthouse</li>
+                                                    <li>Page Speed Insights</li>
+                                                    <li>webpagetest.org</li>
+                                                </ul>
+
+
+                                            </p>
+                                            <br/>
+
+                                            <b>
+                                                 WHY FIREBASE, WHY NOT AZURE,AWS OR A MARKET STANDARD PLATFORM
+                                            </b>
+                                            <p>
+                                                Firebase is the Best! Need to know more ?! Mail to INPCJT
+                                            </p>
+                                            <br/>
+
+                                            <b>
+                                                 WHY A WEBSITE, WHY NOT A NATIVE APP
+                                            </b>
+                                            <p>
+                                                Browsers are very powerful these days, whatever native apps do, browsers can do it better and faster. You need native apps
+                                                if need is everyday,<br/>                                                Quick check How many apps do you use regularly and how many are just sitting
+                                                there on the phone?
+                                                <br/>Trust me you dont need native app Have a look at progressive web apps.
+                                                <br/>Native apps requires a different skill set which we dont have
+
+                                            </p>
+                                            <br/>
+
+                                            <b>
+                                                 HOW CAN YOU SAY, NATIVE APP IS NOT REQUIRED
+                                            </b>
+                                            <p>
+                                                From user perspective:Native App
+                                                <ul style="list-style-type:none">
+                                                    <li>You go to playstore</li>
+                                                    <li>Search for the app</li>
+                                                    <li>Install the app (which will be more than 5mb)</li>
+                                                    <li>Then use the app</li>
+                                                    <li>The app consumes sufficient memory and battery</li>
+                                                    <li>The old version just sits on the phone</li>
+                                                </ul>
+
+                                                Progressive web app:
+                                                <ul style="list-style-type:none">
+                                                    <li>You visit the URL</li>
+                                                    <li>Start using the App</li>
+                                                    <li>Add to HomeScreen if you need quick access!</li>
+
+                                                </ul>
+
+
+                                            </p>
+                                            <br/>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#feedbackId">
+                                        <div class="panel-heading pnl">
+                                            <h4 class="panel-title">
+                                                FEEDBACK
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="feedbackId" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <b>
+                                                 THIS IS REALLY COOL STUFF, I WANT THANK YOU GUYS, WHOM SHOULD I CONTACT
+                                            </b>
+                                            <p>
+                                                We just accept bitcoins and currency in INR,For further details Mail to INPCJT
+
+                                            </p>
+                                            <br/>
+
+                                            <b>
+                                                 THIS APP IS STUPID, I DONT WANT USE IT, I DEMAND A BETTER APP
+                                            </b>
+                                            <p>
+                                                You are always free to develop the app and showcase, incase if its better we will replace our app with yours
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 I HAVE FOUND FEW BUGS IN THE APP, HOW CAN I REPORT IT? DO YOU GUYS RUN A BUG BOUNTY PROGRAMME?
+                                            </b>
+                                            <p>
+                                                We can always buy you a coffee from the Energy Hub, Mail the bug details to INPCJT
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 I HAVE A COOL IDEA, CAN YOU GUYS HELP ME IMPLEMENT
+                                            </b>
+                                            <p>
+                                                Yes, but not for Free! Mail the details to INPCJT
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#othersId">
+                                        <div class="panel-heading pnl">
+                                            <h4 class="panel-title">
+                                                OTHERS
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="othersId" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <b>
+                                                 I HAVE A BETTER SOLUTION,HOW CAN I CONTRIBUTE/HELP
+                                            </b>
+                                            <p>
+                                                Please contact Facilities Team Or INPCJT
+
+                                            </p>
+                                            <br/>
+
+                                            <b>
+                                                 I WANT TO KNOW MORE HOW THIS APP WAS BUILT, IS THERE ANY DOCUMENTATION
+                                            </b>
+                                            <p>
+                                                Documentation is for sissies! <br/> Drop a mail to INPCJT, we would be more
+                                                than happy to help
+                                            </p>
+                                            <br/>
+                                            <b>
+                                                 I HAVE OTHER QUESTIONS
+                                            </b>
+                                            <p>
+                                                Mail to INPCJT
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                        <div class="panel-heading pnl">
+                                            <h4 class="panel-title">
+                                                DEVELOPED BY
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapse2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="col-sm-12">
+
+                                                <div class="col-sm-3 center ">
+                                                    <img class="img-circle imga" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
+                                                    <div class="persDetails">Aashish</div>
+                                                </div>
+                                                <div class="col-sm-1">
+
+                                                </div>
+                                                <div class="col-sm-3 center ">
+                                                    <img class="img-circle imga" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
+                                                    <div class="persDetails">Pavan</div>
+                                                </div>
+                                                <div class="col-sm-1">
+
+                                                </div>
+                                                <div class="col-sm-3 center ">
+                                                    <img class="img-circle imga" src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" width="100%" />
+                                                    <div class="persDetails"> Rohan </div>
+                                                </div>
+                                                <div class="col-sm-1">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
+
 
                     </div>
 
@@ -208,12 +688,12 @@ transparent;border-top:17px solid transparent}div.hopscotch-bubble .hopscotch-ac
     </div>
 
     <body>
-        <span class="activateIcon" id="activate" onclick="delgateActivateRemoveTheRoutes(this);">
+        <button class="activateIcon" id="btn-confirm">
      <span class="glyphicon glyphicon-ok"></span>
-        </span>
-        <span class="removeIcon" id="remove" onclick="delgateActivateRemoveTheRoutes(this);">
+        </button>
+        <button class="removeIcon" id="remove" onclick="delgateActivateRemoveTheRoutes(this);">
      <span class="glyphicon glyphicon-remove"></span>
-        </span>
+        </button>
 
 
         <div class="upnav" id="myUpnav">
@@ -302,6 +782,36 @@ transparent;border-top:17px solid transparent}div.hopscotch-bubble .hopscotch-ac
         <input class="controls" id="pac-input" placeholder="Destination" type="text" />
 
 
+        <button class="btn btn-default" id="btn-confirm">Confirm</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="activateRouteModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Save and Activate the Route</h4>
+      </div>
+        <div class="modal-body">
+            <p>You are about to Save and Activate the Route.</p>
+            <p>Do you want to proceed?</p>
+        </div>
+      <div class="modal-footer confirmDialogModalFooter">
+        <button type="button" class="btn btn-default" id="modal-btn-si">Yes</button>
+        <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert" role="alert" id="result"></div>
+
+       
+
+         <!-- snackbar-->
+    <div class="snackbar" id="saved"></div>
+    <div class="snackbar" id="noMoreRoutes"></div>
+    <div class="snackbar" id="selectRoute"></div>
+    <div class="snackbar" id="enterValidData"></div>
 
 
 

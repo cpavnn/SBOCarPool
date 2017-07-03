@@ -1,5 +1,5 @@
 function logout_js() {
-    
+
 }
 
 function requestConfirmation() {
@@ -55,7 +55,8 @@ function suggest(proximity) {
 
 
     } else {
-        alert('Choose a point on the map and click search');
+        //alert('Choose a point on the map and click search');
+        showSnackbar('chooseAPoint','Choose a point on the map and click search',3000);
     }
 }
 
@@ -121,8 +122,8 @@ function runGeoQuery() {
             userRef.once('value').then(function (snapshot) {
 
                 if ((snapshot.val().remainingSeats > 0 || !snapshot.hasChild('remainingSeats')) && snapshot.key !== getCurrentUserUID()) {
-                    if(typeof snapshot.val().car !== "undefined")
-                     populateTable(snapshot.val(), snapshot.key);
+                    if (typeof snapshot.val().car !== "undefined")
+                        populateTable(snapshot.val(), snapshot.key);
 
                 }
             }).then(function (success) {
@@ -172,8 +173,8 @@ function replaceTag(tag) {
 }
 
 function safe_tags_replace(str) {
-    
-    if(typeof str !== "undefined")
+
+    if (typeof str !== "undefined")
         return str.replace(/[&<>]/g, replaceTag);
 }
 
@@ -183,8 +184,8 @@ function populateTable(carpooluser, carpooluserKey) {
 
     //var HTMLCard = '<div onclick=\"prepareTheRequest(this);\" class="col-md-4 userInfoCard"  data-userkey=' + carpooluserKey + ' data-usermailid= ' + carpooluser.shellMailId + '><div class="suggestionsCard col-md-12"> <div class="mailIdInfo" > ' + carpooluser.shellMailId + ' </div> <div class="pd3"> <span> ' + carpooluser.car + ' </span> <span style="float: right;"> ' + carpooluser.vehicleNumber + '</span> </div> <div class="pd3"> Going to:  <span> ' + carpooluser.homeLocation + '</span> </div> <div class="pd3"> Leaves Home at: <span> ' + carpooluser.leaveHomeAt + '</span> </div><div class="pd3"> Leaves Office at: <span> ' + carpooluser.leaveOfficeAt + '</span> </div> <div> <button class="requestBtn"> request </button> </div> </div> </div> ';
     var HTMLCard = '<div onclick=\"prepareTheRequest(this);\" class="col-md-4 userInfoCard"  data-userkey=' + safe_tags_replace(carpooluserKey) + ' data-usermailid= ' + safe_tags_replace(carpooluser.shellMailId) + '><div class="suggestionsCard col-md-12"> <div class="mailIdInfo" > ' + safe_tags_replace(carpooluser.shellMailId) + ' </div> <div class="pd3"> <span> ' + safe_tags_replace(carpooluser.car) + ' </span> <span style="float: right;"> ' + safe_tags_replace(carpooluser.vehicleNumber) + '</span> </div> <div class="pd3"> Going to:  <span> ' + safe_tags_replace(carpooluser.homeLocation) + '</span> </div> <div class="pd3"> Leaves Home at: <span> ' + safe_tags_replace(carpooluser.leaveHomeAt) + '</span> </div><div class="pd3"> Leaves Office at: <span> ' + safe_tags_replace(carpooluser.leaveOfficeAt) + '</span> </div> <div> <button class="requestBtn"> request </button> </div> </div> </div> ';
-    
-    
+
+
     console.log('creating card');
     if (j$('.NoDataFound').is(":visible")) {
         console.log('removing no data found');
@@ -397,7 +398,7 @@ function updateRemainingSeats(userId, counter) {
     firebaseRef.transaction(function (remainingSeats) {
         return remainingSeats + counter;
     }).then(function (sucess) {
-       
+
     }).catch(function (error) {
         console.log('error', error);
     });
@@ -441,7 +442,7 @@ function prepareTheRequest(requestToUser) {
 
 
 function openMailWindow() {
-   j$("#Rmail").get(0).click();
+    j$("#Rmail").get(0).click();
 
 }
 
@@ -471,9 +472,9 @@ function checkIfAlreadyRequested() {
                 console.log('this is the user', requestedToUser.val());
 
                 //j$("#Rmail").attr("href","mailto:"+ requestedToUser.val().shellMailId).text(requestedToUser.val().shellMailId);
-                j$("#Rmail").attr("href","mailto:"+ requestedToUser.val().shellMailId + '?subject= New passenger request' + '&body=Hello! %0A%0AI would like to join with you for the carpool.%0A %0A Thanks!').text(requestedToUser.val().shellMailId);
+                j$("#Rmail").attr("href", "mailto:" + requestedToUser.val().shellMailId + '?subject= New passenger request' + '&body=Hello! %0A%0AI would like to join with you for the carpool.%0A %0A Thanks!').text(requestedToUser.val().shellMailId);
                 j$("#Rcar").text(requestedToUser.val().car);
-                j$("#Rnum").text(requestedToUser.val().vehicleNumber);
+                j$("#Rnum").text("Number: "+requestedToUser.val().vehicleNumber);
                 j$("#Rhome").text(requestedToUser.val().homeLocation);
                 j$("#Rleavehome").text(requestedToUser.val().leaveHomeAt);
                 j$("#Rleaveoff").text(requestedToUser.val().leaveOfficeAt);
@@ -515,10 +516,10 @@ function handleRedirect() {
         if (user) {
             var firebaseRef = getFirebaseRef().child('users').child(getCurrentUserUID()).child('isVerified');
             firebaseRef.once('value').then(function (snapshot) {
-                console.log('snapshot',snapshot);
+                console.log('snapshot', snapshot);
                 if (snapshot.val()) {
 
-                    console.log('this is snapshot val',snapshot.val());
+                    console.log('this is snapshot val', snapshot.val());
                     initialiseGeoQuery();
                     clearuidList();
                     checkIfAlreadyRequested();
@@ -529,8 +530,8 @@ function handleRedirect() {
                     redirect(homePageURL);
 
                 }
-            }).catch (function (error) {
-                console.log('error in reading is verified',error);
+            }).catch(function (error) {
+                console.log('error in reading is verified', error);
             });
         } else {
             // No user is signed in.
@@ -563,17 +564,31 @@ function redirect(URL) {
     window.location = URL;
 }
 
+function showSnackbar(elementID, message, timeout) {
+
+    var x = document.getElementById(elementID);
+    x.innerHTML = message;
+
+    x.className = "snackbar show";
+
+    setTimeout(function () {
+        var x = document.getElementById(elementID);
+        x.innerHTML = '';
+        x.className = "snackbar";
+    }, timeout);
+}
+
 j$ = jQuery.noConflict();
 
 j$('.navbar-toggle').on('click', function () {
     console.log('===', typeof j$(".exisitingRequest").css("top"));
-     if (j$(".exisitingRequest").css("top") != "-360px") {    
-        if(j$('.navbar-toggle').attr("aria-expanded") == "true")
+    if (j$(".exisitingRequest").css("top") != "-360px") {
+        if (j$('.navbar-toggle').attr("aria-expanded") == "true")
             j$(".exisitingRequest").css("top", "60px");
         else
             j$(".exisitingRequest").css("top", "200px");
     }
-    if(j$("#mySidenav").css("width") != "0px")
+    if (j$("#mySidenav").css("width") != "0px")
         closeNav();
 
 

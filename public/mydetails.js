@@ -22,11 +22,13 @@ function callctr_js(t) {
 }
 /* ---------------------------------------------------------------- */
 function alertSaved() {
-    alert('Saved');
+    //alert('Saved');
+    showSnackbar('saved', 'saved', 3000);
 }
 
 function alertError() {
-    alert('Error! Please enter valid data');
+    //alert('Error! Please enter valid data');
+    showSnackbar('enterValidData', 'Error! Please enter valid data', 3000);
 }
 
 
@@ -128,7 +130,8 @@ function addNewRoute() {
 
         toggleSearch('visible');
     } else {
-        alert('You cant have more than 4 routes, Remove the existing routes..');
+        //alert('You cant have more than 4 routes, Remove the existing routes..');
+        showSnackbar('noMoreRoutes', 'You cant have more than 4 routes, Remove the existing routes..', 3000);
     }
 } /* ---------------------------------------------------------------- */
 
@@ -147,7 +150,8 @@ function delgateActivateRemoveTheRoutes(t) {
             }
         }
     } else {
-        alert('Please select the route ');
+        //alert('Please select the route ');
+        showSnackbar('selectRoute', 'Please select the route', 3000);
     }
 } /* ---------------------------------------------------------------- */
 
@@ -171,6 +175,36 @@ function toggleActiveClass() {
 
 
 }
+
+/************************* */
+var modalConfirm = function (callback) {
+
+    $("#btn-confirm").on("click", function () {
+        $("#activateRouteModal").modal('show');
+    });
+
+    $("#modal-btn-si").on("click", function () {
+        callback(true);
+        $("#activateRouteModal").modal('hide');
+    });
+
+    $("#modal-btn-no").on("click", function () {
+        callback(false);
+        $("#activateRouteModal").modal('hide');
+    });
+};
+
+modalConfirm(function (confirm) {
+    if (confirm) {
+        //Acciones si el usuario confirma
+        $("#result").html("CONFIRMADO");
+        
+
+    } else {
+        //Acciones si el usuario no confirma
+        $("#result").html("NO CONFIRMADO");
+    }
+});
 
 function activateTheRoutes(route_Id) {
 
@@ -262,7 +296,9 @@ function populateRouteMarkers(rtMarks) {
 
         drawRoute();
     } else {
-        alert('No data found!');
+        //alert('No data found!');
+        showSnackbar('noMoreRoutes', 'No data found!', 3000);
+
     }
 }
 
@@ -718,7 +754,8 @@ function fr_addNewRoute() {
 
         toggleSearch('visible');
     } else {
-        alert('You cant have more than 4 routes, Remove the existing routes..');
+        //alert('You cant have more than 4 routes, Remove the existing routes..');
+        showSnackbar('noMoreRoutes', 'You cant have more than 4 routes, Remove the existing routes..', 3000);
     }
 
 }
@@ -777,7 +814,8 @@ function fr_populateRouteMarkers(rtMarks) {
 
         fr_drawRoute();
     } else {
-        alert('No data found!');
+        //alert('No data found!');
+        showSnackbar('noMoreRoutes', 'No data found!', 3000);
     }
 }
 
@@ -1419,6 +1457,19 @@ function redirect(URL) {
     window.location = URL;
 }
 
+function showSnackbar(elementID, message, timeout) {
+
+    var x = document.getElementById(elementID);
+    x.innerHTML = message;
+
+    x.className = "snackbar show";
+
+    setTimeout(function () {
+        var x = document.getElementById(elementID);
+        x.innerHTML = '';
+        x.className = "snackbar";
+    }, timeout);
+}
 
 function tourDetails() {
     var tour;
@@ -1474,8 +1525,8 @@ function startTour() {
 }
 
 $('.navbar-toggle').on('click', function () {
-   
-    if($("#myUpnav").css("height") != "0px")
+
+    if ($("#myUpnav").css("height") != "0px")
         closeNav();
 
 
