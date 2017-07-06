@@ -199,6 +199,7 @@ function populateTable(carpooluser, carpooluserKey) {
 /* ---------------------------------------------------------------- */
 
 function openNav() {
+    browserHistoryPush();
     document.getElementById("mySidenav").style.width = "100%";
 }
 
@@ -593,7 +594,41 @@ j$('.navbar-toggle').on('click', function () {
 
 
 });
+
+/* BROWSER HISTORY */
+var historySupported = false;
+
+function isSupportedBrowserHistory() {
+    return !!(window.history && history.pushState);
+}
+
+function popStateHandler(event) {
+    if (event.state != null) {
+        console.log('got event state is ', event.state);
+        if (event.state == 0) {
+            console.log('close the form');
+            closeNav();
+        }
+    }
+}
+
+function browserHistoryPush(){
+    history.pushState(1, 'detailsOpened', 'requestride.html#open');
+}
+
+function browserHistoryinit() {
+    historySupported = isSupportedBrowserHistory();
+    if (historySupported) {
+        console.log('This browser supports history');
+        history.replaceState(0, 'number 0', null);
+        window.onpopstate = popStateHandler;
+    } else {
+        console.log('browser doesnt support history api');
+    }
+}
+
 window.onload = function () {
+    browserHistoryinit();
     loadScript();
     handleRedirect();
 

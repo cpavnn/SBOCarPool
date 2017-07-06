@@ -1,4 +1,4 @@
-const version = 'carpoolv2.0';
+const version = 'carpoolv0.6';
 
 self.addEventListener('install', function (event) {
     self.skipWaiting();
@@ -7,7 +7,7 @@ self.addEventListener('install', function (event) {
             .then(function (cache) {
                 return cache.addAll([
                     
-                    'index.html',                    
+                    
                     '/app.js',
                     '/firebasejs/firebaseapp.js',                    
                     '/bootstrap.min.js',                               

@@ -69,6 +69,7 @@ function checkFields() {
 
 /* ---------------------------------------------------------------- */
 function openNav() {
+    browserHistoryPush();
     document.getElementById('myUpnav').style.height = '90%';
     document.getElementById('routesDiv').style.zIndex = '1';
     var hopClasses = document.getElementsByClassName('tour-hello-hopscotch');
@@ -136,23 +137,17 @@ function addNewRoute() {
 } /* ---------------------------------------------------------------- */
 
 function delgateActivateRemoveTheRoutes(t) {
-    if (!selectedClassDivs) {
-        selectedClassDivs = document.getElementsByClassName('selected');
-    }
-    if (selectedClassDivs.length > 0) {
-        var route_Id = selectedClassDivs[0].parentNode.id;
 
-        {
-            if (t.id === 'activate') {
-                activateTheRoutes(route_Id);
-            } else if (t.id === 'remove') {
-                removeTheRoutes(route_Id);
-            }
+    var route_Id = selectedClassDivs[0].parentNode.id;
+
+    {
+        if (t.id === 'activate') {
+            activateTheRoutes(route_Id);
+        } else if (t.id === 'remove') {
+            removeTheRoutes(route_Id);
         }
-    } else {
-        //alert('Please select the route ');
-        showSnackbar('selectRoute', 'Please select the route', 3000);
     }
+
 } /* ---------------------------------------------------------------- */
 
 function toggleActiveClass() {
@@ -179,37 +174,100 @@ function toggleActiveClass() {
 /************************* */
 var modalConfirm = function (callback) {
 
-    $("#btn-confirm").on("click", function () {
-        $("#activateRouteModal").modal('show');
+    $("#btn-activateRouteModal").on("click", function () {
+        // if (gcodes.length > 0 && gcodes.length < 65) 
+        if (gcodes.length > 65) {
+            showSnackbar('selectRoute', 'Only destinations within the city limits(30 Kms from office) are allowed', 3000);
+            return;
+        }
+        {
+
+            if (!selectedClassDivs) {
+                selectedClassDivs = document.getElementsByClassName('selected');
+            }
+            if (selectedClassDivs.length > 0) {
+                if ((selectedClassDivs[0].parentNode.id.indexOf('route') == -1 && gcodes.length == 0) || (gcodes.length > 0)) {
+                    $("#activateRouteModal").modal('show');
+                } else {
+                    showSnackbar('selectRoute', 'Please search the destination', 3000);
+                }
+            } else {
+                //alert('Please select the route ');
+                showSnackbar('selectRoute', 'Please select the route', 3000);
+            }
+        }
+        //  else {
+        //     showSnackbar('selectRoute', 'Please search the destination', 3000);
+        // }
     });
 
-    $("#modal-btn-si").on("click", function () {
-        callback(true);
+    $("#modal-btn-activate-yes").on("click", function () {
+        callback('activate-true');
         $("#activateRouteModal").modal('hide');
     });
 
-    $("#modal-btn-no").on("click", function () {
-        callback(false);
+    $("#modal-btn-activate-no").on("click", function () {
+        callback('activate-false');
         $("#activateRouteModal").modal('hide');
+    });
+
+
+    $("#btn-deactivateRouteModal").on("click", function () {
+        if (!selectedClassDivs) {
+            selectedClassDivs = document.getElementsByClassName('selected');
+        }
+        if (selectedClassDivs.length > 0) {
+            $("#deactivateRouteModal").modal('show');
+        } else {
+            //alert('Please select the route ');
+            showSnackbar('selectRoute', 'Please select the route', 3000);
+        }
+
+    });
+
+    $("#modal-btn-deactivate-yes").on("click", function () {
+        callback('deactivate-true');
+        $("#deactivateRouteModal").modal('hide');
+    });
+
+    $("#modal-btn-deactivate-no").on("click", function () {
+        callback('deactivate-false');
+        $("#deactivateRouteModal").modal('hide');
     });
 };
 
-modalConfirm(function (confirm) {
-    if (confirm) {
-        //Acciones si el usuario confirma
-        $("#result").html("CONFIRMADO");
-        
+modalConfirm(function (confirmMsg) {
+    var route_Id;
 
-    } else {
-        //Acciones si el usuario no confirma
-        $("#result").html("NO CONFIRMADO");
+    var selectedDiv = document.getElementsByClassName('selected');
+    if (selectedDiv.length > 0) {
+        route_Id = selectedDiv[0].parentNode.id;
+    }
+    //ACTIVATE THE ROUTE
+    {
+        if (confirmMsg == 'activate-true') {
+            console.log('yes activate', route_Id);
+            activateTheRoutes(route_Id)
+        } else if (confirmMsg == 'activate-false') {
+            console.log('dont activate', route_Id);
+        }
+    }
+    //DEACTIVATE THE ROUTE
+    {
+        if (confirmMsg == 'deactivate-true') {
+            console.log('yes deactivate', route_Id);
+            removeTheRoutes(route_Id);
+        } else if (confirmMsg == 'deactivate-false') {
+            console.log('dont deactivate', route_Id);
+        }
     }
 });
 
 function activateTheRoutes(route_Id) {
 
-    var confirm = window.confirm('Save and activate the Route  ?');
-    if (confirm) {
+    //var confirm = window.confirm('Save and activate the Route  ?');
+    //if (confirm) 
+    {
         console.log('activate');
         toggleSearch('hidden');
 
@@ -227,8 +285,9 @@ function activateTheRoutes(route_Id) {
 } /* ---------------------------------------------------------------- */
 
 function removeTheRoutes(route_Id) {
-    var confirm = window.confirm('Remove the Route  ?');
-    if (confirm) {
+    //var confirm = window.confirm('Remove the Route  ?');
+    //if (confirm) 
+    {
         noOfRoutes--;
         noOfRoutes++;
         //SERVER CALL IF SUCCSSFUL REMOVE
@@ -1128,7 +1187,7 @@ function del_setDeleteToTrueForTheRoute(routeToDelete) {
     firebaseRef.once('value', function (snapshot) {
         console.log('===>', snapshot.val().isActive);
         //if active route
-        if (snapshot.val().isActive) {
+        if (snapshot.val() && snapshot.val().isActive) {
             del_getActiveRouteKeys();
         }
     }).then(function (sucess) {
@@ -1532,9 +1591,41 @@ $('.navbar-toggle').on('click', function () {
 
 });
 
+/* BROWSER HISTORY */
+var historySupported = false;
+
+function isSupportedBrowserHistory() {
+    return !!(window.history && history.pushState);
+}
+
+function popStateHandler(event) {
+    if (event.state != null) {
+        console.log('got event state is ', event.state);
+        if (event.state == 0) {
+            console.log('close the form');
+            closeNav();
+        }
+    }
+}
+
+function browserHistoryPush() {
+    history.pushState(1, 'detailsOpened', 'mydetails.html#open');
+}
+
+function browserHistoryinit() {
+    historySupported = isSupportedBrowserHistory();
+    if (historySupported) {
+        console.log('This browser supports history');
+        history.replaceState(0, 'number 0', null);
+        window.onpopstate = popStateHandler;
+    } else {
+        console.log('browser doesnt support history api');
+    }
+}
 window.onload = function () {
     ginit();
     handleRedirect();
+    browserHistoryinit();
 
 };
 
