@@ -7,7 +7,11 @@ self.addEventListener('install', function (event) {
             .then(function (cache) {
                 return cache.addAll([
                     
-                    
+                    'index.html',
+                    'icons/aashish.JPG',
+                    'icons/rohan.jpg',
+                    'icons/pavan.jpg',
+                    'icons/WW89650_low.jpg',
                     '/app.js',
                     '/firebasejs/firebaseapp.js',                    
                     '/bootstrap.min.js',                               

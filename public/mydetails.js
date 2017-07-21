@@ -117,7 +117,7 @@ function addExistingRoutes() {
 
 function addNewRoute() {
     if(document.getElementById('j_id0:detailFrm:vehicle')){
-        if(!(document.getElementById('j_id0:detailFrm:vehicle').value > 0)) {
+        if(!(document.getElementById('j_id0:detailFrm:vehicle').value.length > 0)) {
             showSnackbar('noMoreRoutes', 'Please fill in your details', 3000);
             openNav();
             return;
