@@ -115,14 +115,26 @@ function addExistingRoutes() {
 
 /* ---------------------------------------------------------------- */
 
-function addNewRoute() {
-    if(document.getElementById('j_id0:detailFrm:vehicle')){
-        if(!(document.getElementById('j_id0:detailFrm:vehicle').value.length > 0)) {
-            showSnackbar('noMoreRoutes', 'Please fill in your details', 3000);
-            openNav();
-            return;
-        }        
+function isMyDetailsFilled() {
+    if (document.getElementById('j_id0:detailFrm:vehicle')) {
+        if ((document.getElementById('j_id0:detailFrm:vehicle').value.length > 0)) {
+            return true;
+        }
     }
+    return false;
+}
+
+function openNavIfMyDetailsEmpty() {
+    if (!(isMyDetailsFilled())) {
+        openNav();
+
+    }
+}
+
+function addNewRoute() {
+
+    openNavIfMyDetailsEmpty();
+
 
     if (noOfRoutes <= 3) {
         clearSelectedClass(' card routeButton valgn ');
@@ -1412,29 +1424,38 @@ function up_setCurrentRotueToActive() {
 /********************** UPDATE EXISTING TO ACTIVE END *************************/
 /************** DISPLAY MY DETAILS */
 function fr_displayMyDetails() {
-    var vehicleName = document.getElementById('j_id0:detailFrm:vehicle');
-    var vehicleCapacity = document.getElementById('j_id0:detailFrm:capacity');
-    var vehicleNum = document.getElementById('j_id0:detailFrm:vehicleNum');
-    var homeLocation = document.getElementById('j_id0:detailFrm:homeLoc');
-    var leaveTo = document.getElementById('j_id0:detailFrm:leaveTo');
-    var leaveFrom = document.getElementById('j_id0:detailFrm:leaveFrom');
 
 
     var userRef = getFirebaseRef().child("users").child(getCurrentUserUID());
     userRef.once('value', function (snapshot) {
         if (snapshot.val() != null) {
-            if (snapshot.val().car)
-                vehicleName.value = snapshot.val().car;
-            if (snapshot.val().capacity)
-                vehicleCapacity.value = snapshot.val().capacity;
-            if (snapshot.val().vehicleNumber)
-                vehicleNum.value = snapshot.val().vehicleNumber;
-            if (snapshot.val().homeLocation)
-                homeLocation.value = snapshot.val().homeLocation;
-            if (snapshot.val().leaveHomeAt)
-                leaveTo.value = snapshot.val().leaveHomeAt;
-            if (snapshot.val().leaveOfficeAt)
-                leaveFrom.value = snapshot.val().leaveOfficeAt;
+
+            if (snapshot.val().car !== undefined) {
+
+                var vehicleName = document.getElementById('j_id0:detailFrm:vehicle');
+                var vehicleCapacity = document.getElementById('j_id0:detailFrm:capacity');
+                var vehicleNum = document.getElementById('j_id0:detailFrm:vehicleNum');
+                var homeLocation = document.getElementById('j_id0:detailFrm:homeLoc');
+                var leaveTo = document.getElementById('j_id0:detailFrm:leaveTo');
+                var leaveFrom = document.getElementById('j_id0:detailFrm:leaveFrom');
+
+
+                if (snapshot.val().car)
+                    vehicleName.value = snapshot.val().car;
+                if (snapshot.val().capacity)
+                    vehicleCapacity.value = snapshot.val().capacity;
+                if (snapshot.val().vehicleNumber)
+                    vehicleNum.value = snapshot.val().vehicleNumber;
+                if (snapshot.val().homeLocation)
+                    homeLocation.value = snapshot.val().homeLocation;
+                if (snapshot.val().leaveHomeAt)
+                    leaveTo.value = snapshot.val().leaveHomeAt;
+                if (snapshot.val().leaveOfficeAt)
+                    leaveFrom.value = snapshot.val().leaveOfficeAt;
+            } else {
+                console.log('no data found');
+                openNav();
+            }
         }
 
 

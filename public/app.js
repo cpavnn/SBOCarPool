@@ -1,8 +1,3 @@
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw-cache.js')
-        .then(console.log)
-        .catch(console.error);
-}
 
 
 /***************FIREBASE **********************/
@@ -155,7 +150,7 @@ function saveShellMailId() {
             $("#myModalVerifyToken").modal();
         }).catch(function (error) {
             console.log('error: mail id not updated,', error);
-            alert('Please enter correct mail id');
+            alert('For user activation, Please contact INPCJT. we have not got approval for using company email id, hence activation is manual. ');
         });
     } else {
         alert('please enter the Shell mail id');
