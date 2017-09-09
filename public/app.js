@@ -1,4 +1,4 @@
-
+console.log("%c JOIN OUR TEAM, CONTACT INPCJT ", "color:grey; font-size: 18px; line-height: 160px; padding-top:60px; background-image:url(https://sbo-car-pool.firebaseapp.com/icons/android-chrome-48x48.png); background-repeat:no-repeat; ");
 
 /***************FIREBASE **********************/
 
@@ -150,7 +150,7 @@ function saveShellMailId() {
             $("#myModalVerifyToken").modal();
         }).catch(function (error) {
             console.log('error: mail id not updated,', error);
-            alert('For user activation, Please contact INPCJT. we have not got approval for using company email id, hence activation is manual. ');
+            alert('For user activation, Please contact INPCJT. we have not got an approval for using company email id, hence activation is manual. ');
         });
     } else {
         alert('please enter the Shell mail id');

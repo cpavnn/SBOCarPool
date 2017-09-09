@@ -3,6 +3,25 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "public"
+    "public": "public",
+    "headers": [  {
+      "source" : "register-sw.js",
+      "headers" : [ {
+        "key" : "Cache-Control",
+        "value" : "max-age=0"
+      } ]
+    },
+    {
+      "source" : "sw-cache.js",
+      "headers" : [ {
+        "key" : "Cache-Control",
+        "value" : "max-age=0"
+      } ]
+    }
+   ]
   }
+   
 }
+
+
+

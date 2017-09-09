@@ -1,3 +1,4 @@
+console.log("%c JOIN OUR TEAM, CONTACT INPCJT ", "color:grey; font-size: 18px; line-height: 160px; padding-top:60px; background-image:url(https://sbo-car-pool.firebaseapp.com/icons/android-chrome-48x48.png); background-repeat:no-repeat; ");
 
 var thisIsClickedButton;
 

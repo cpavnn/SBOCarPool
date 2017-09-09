@@ -1,3 +1,5 @@
+console.log("%c JOIN OUR TEAM, CONTACT INPCJT ", "color:grey; font-size: 18px; line-height: 160px; padding-top:60px; background-image:url(https://sbo-car-pool.firebaseapp.com/icons/android-chrome-48x48.png); background-repeat:no-repeat; ");
+
 function logout_js() {
 
 }
@@ -200,14 +202,16 @@ function populateTable(carpooluser, carpooluserKey) {
 
 function openNav() {
     browserHistoryPush();
-    document.getElementById("mySidenav").style.width = "100%";
+    //document.getElementById("mySidenav").style.width = "100%";
+    document.getElementById("mySidenav").style.transform = "translate3d(0,0,0)";
 }
 
 
 /* ---------------------------------------------------------------- */
 
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    //document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.transform = "translate3d(-100%,0,0)";
 }
 
 /* ---------------------------------------------------------------- */
