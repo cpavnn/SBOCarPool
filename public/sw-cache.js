@@ -1,29 +1,17 @@
-const version = 'carpoolv0.1';
+const version = 'carpoolv0.4';
 
 self.addEventListener('install', function (event) {
     self.skipWaiting();
-    //REMOVE PREIVOUS CACHE
-    event.waitUntil(
-        caches.keys()
-            .then(function (keys) {
-                return Promise.all(keys.filter(function (key) {
-                    return key !== version;
-                }).map(function (key) {
-                    return caches.delete(key);
-                }));
-            }));
-
     event.waitUntil(
         caches.open(version)
             .then(function (cache) {
                 return cache.addAll([
-
-                    // 'index.html',
+                    
                     'icons/aashish.jpg',
                     'icons/rohan.jpg',
                     'icons/pavan.jpg',
                     'icons/WW89650_low.jpg',
-                    // '/app.js',
+                     '/app.js',
                     '/firebasejs/firebaseapp.js',
                     '/bootstrap.min.js',
                     '/hopscotch.min.js',
@@ -38,15 +26,20 @@ self.addEventListener('install', function (event) {
 
 
                 ]);
-            })
-    );
-
+            }));
 });
 
 self.addEventListener('activate', function (event) {
-
-    console.log('SW now ready to handle fetches!');
-    return self.clients.claim();
+    //REMOVE PREIVOUS CACHE
+    event.waitUntil(
+      caches.keys()
+      .then(function (keys) {
+        return Promise.all(keys.filter(function(key) {
+            return key!==version;
+        }).map(function(key) {
+            return caches.delete(key);
+        }));
+      }));
 });
 
 self.addEventListener('fetch', function (event) {
@@ -54,7 +47,7 @@ self.addEventListener('fetch', function (event) {
         caches.match(event.request)
             .then(function (res) {
                 return res || fetch(event.request);
-
+                
 
             })
     );
