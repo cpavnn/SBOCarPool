@@ -286,6 +286,25 @@ function redirect() {
     window.location = requestrideURL;
 }
 
+function lazyLoadImages(AboutElement) {
+    return function () {
+
+        var lazy = document.getElementsByClassName('lazy');
+        var lazyElementsLength = lazy.length; 
+        
+        for (var i = 0; i < lazyElementsLength; i++) {
+            lazy[i].src = lazy[i].getAttribute('data-src');
+        }
+
+        AboutElement.removeEventListener("click", lazyLoadImages);
+        AboutElement.removeEventListener("touchstart", lazyLoadImages);
+    }
+
+}
+
 window.onload = function () {
     handleRedirect();
+    var AboutElement = document.getElementById("About");
+    AboutElement.addEventListener("click", lazyLoadImages(AboutElement));
+    AboutElement.addEventListener("touchstart", lazyLoadImages(AboutElement));
 };
